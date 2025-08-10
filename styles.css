@@ -397,7 +397,69 @@ footer {
   margin-bottom: 10px;
   object-fit: cover;
 }
-/* Reuse styles from Theo's Bakery case study */
+/* ===========================
+   CASE STUDY GLOBAL STYLES
+   =========================== */
+
+.case-study {
+  padding: 2rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.case-study h1, 
+.case-study h2, 
+.case-study h3 {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1rem;
+}
+
+.case-study p, 
+.case-study li {
+  font-family: 'Mulish', sans-serif;
+  line-height: 1.6;
+}
+
+/* ===========================
+   HERO SECTION
+   =========================== */
+.cs-hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.cs-hero-text {
+  flex: 1 1 400px;
+}
+
+.cs-hero-img {
+  flex: 1 1 400px;
+}
+
+.cs-hero-img img,
+.hero-gif {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  border-radius: 10px;
+  display: block;
+}
+
+/* ===========================
+   OVERVIEW & PROCESS
+   =========================== */
+.cs-overview, 
+.cs-process, 
+.cs-wireframes, 
+.cs-hifi, 
+.cs-accessibility, 
+.cs-impact {
+  margin-bottom: 3rem;
+}
 
 .cs-process ol {
   padding-left: 1.2rem;
@@ -405,30 +467,32 @@ footer {
 
 .cs-process li {
   margin-bottom: 0.5rem;
-  line-height: 1.5;
 }
 
 .cs-process strong {
-  color: #158C62;
+  color: #158C62; /* Primary green */
 }
 
-.cs-hero-img img {
-  max-width: 100%;
-  border-radius: 10px;
-}
-
+/* ===========================
+   WIREFRAMES
+   =========================== */
 .wireframe-row {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
 .wireframe-row img {
   width: 100%;
   max-width: 350px;
   border-radius: 8px;
+  background: #111;
 }
 
+/* ===========================
+   HIGH-FIDELITY DESIGNS
+   =========================== */
 .hifi-grid {
   display: flex;
   gap: 1rem;
@@ -439,85 +503,33 @@ footer {
   width: 100%;
   max-width: 350px;
   border-radius: 8px;
-}
-.case-study {
-  background-color: #111;
-  color: #f4f4f4;
-  padding: 2rem;
-  font-family: 'Mulish', sans-serif;
+  background: #111;
 }
 
-.cs-hero {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 4rem;
+/* ===========================
+   ACCESSIBILITY LIST
+   =========================== */
+.cs-accessibility ul {
+  list-style: disc inside;
+  padding-left: 1rem;
 }
 
-.cs-hero-text {
-  flex: 1;
+.cs-accessibility li {
+  margin-bottom: 0.5rem;
 }
 
-.cs-hero-img img {
-  max-width: 100%;
-  border-radius: 10px;
-}
-
-h1, h2, h3 {
-  color: #158C62;
-  font-family: 'Inter', sans-serif;
-}
-
-.cs-overview, .cs-persona, .cs-journey, .cs-wireframes, .cs-hifi, .cs-accessibility, .cs-impact {
-  margin-bottom: 3rem;
-}
-
-.persona-content {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.persona-content img {
-  max-width: 200px;
-  border-radius: 10px;
-}
-
-.cs-journey img,
-.cs-overview img,
-.wireframe-row img,
-.hifi-grid img {
-  width: 100%;
-  max-width: 350px;
-  border-radius: 8px;
-}
-
-.wireframe-row, .hifi-grid {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.prototype-btn {
-  display: inline-block;
-  background: linear-gradient(to right, #158C62, #12b97d);
-  color: #fff;
-  padding: 0.8rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-.prototype-btn:hover {
-  background: linear-gradient(to right, #12b97d, #158C62);
-}
-
+/* ===========================
+   RESPONSIVE
+   =========================== */
 @media (max-width: 768px) {
   .cs-hero {
     flex-direction: column;
+    text-align: center;
   }
-  .persona-content {
-    flex-direction: column;
+  .cs-hero-text {
+    text-align: center;
+  }
+  .wireframe-row, .hifi-grid {
+    justify-content: center;
   }
 }
