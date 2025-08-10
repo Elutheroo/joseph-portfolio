@@ -397,3 +397,127 @@ footer {
   margin-bottom: 10px;
   object-fit: cover;
 }
+/* Reuse styles from Theo's Bakery case study */
+
+.cs-process ol {
+  padding-left: 1.2rem;
+}
+
+.cs-process li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.cs-process strong {
+  color: #158C62;
+}
+
+.cs-hero-img img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.wireframe-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wireframe-row img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 8px;
+}
+
+.hifi-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hifi-grid img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 8px;
+}
+.case-study {
+  background-color: #111;
+  color: #f4f4f4;
+  padding: 2rem;
+  font-family: 'Mulish', sans-serif;
+}
+
+.cs-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.cs-hero-text {
+  flex: 1;
+}
+
+.cs-hero-img img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+h1, h2, h3 {
+  color: #158C62;
+  font-family: 'Inter', sans-serif;
+}
+
+.cs-overview, .cs-persona, .cs-journey, .cs-wireframes, .cs-hifi, .cs-accessibility, .cs-impact {
+  margin-bottom: 3rem;
+}
+
+.persona-content {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.persona-content img {
+  max-width: 200px;
+  border-radius: 10px;
+}
+
+.cs-journey img,
+.cs-overview img,
+.wireframe-row img,
+.hifi-grid img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 8px;
+}
+
+.wireframe-row, .hifi-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.prototype-btn {
+  display: inline-block;
+  background: linear-gradient(to right, #158C62, #12b97d);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.prototype-btn:hover {
+  background: linear-gradient(to right, #12b97d, #158C62);
+}
+
+@media (max-width: 768px) {
+  .cs-hero {
+    flex-direction: column;
+  }
+  .persona-content {
+    flex-direction: column;
+  }
+}
