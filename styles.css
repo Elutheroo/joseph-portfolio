@@ -747,3 +747,10 @@ footer {
 .projects-grid::-webkit-scrollbar {
   display: none;
 }
+.project-card img {
+  width: 100%;
+  aspect-ratio: 2936 / 1832; /* keep your exact ratio */
+  object-fit: cover; /* crop to fill without stretching */
+  display: block;
+  border-radius: 6px; /* optional rounded corners */
+}
