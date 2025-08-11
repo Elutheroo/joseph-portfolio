@@ -661,3 +661,50 @@ footer {
 .projects-grid::-webkit-scrollbar {
   display: none;
 }
+.projects-grid {
+  display: flex;
+  gap: 2rem; /* space between cards */
+  overflow-x: auto; /* enables horizontal scroll */
+  scroll-snap-type: x mandatory; /* smooth snap scroll */
+  padding-bottom: 1rem;
+}
+
+.project-card {
+  flex: 0 0 300px; /* fixed width for each card */
+  background-color: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-card h3 {
+  margin: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.project-card p {
+  margin: 0 1rem 1rem;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Optional: Hide scrollbar on WebKit browsers */
+.projects-grid::-webkit-scrollbar {
+  display: none;
+}
