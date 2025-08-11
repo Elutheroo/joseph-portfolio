@@ -853,3 +853,11 @@ footer {
   transform: translateY(-5px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
+.project-card img {
+  width: calc(100% - 2rem); /* full width minus padding */
+  aspect-ratio: 2400 / 1500;
+  object-fit: cover;
+  display: block;
+  margin: 1rem auto 0 auto; /* same horizontal margin as text */
+  border-radius: 6px; /* optional, matches card */
+}
