@@ -802,3 +802,54 @@ footer {
   transform: translateY(-5px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two columns on desktop */
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr; /* stack vertically on mobile */
+  }
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card img {
+  width: 100%;
+  aspect-ratio: 2400 / 1500; /* your exact proportion */
+  object-fit: cover;
+  display: block;
+}
+
+.project-card-content {
+  padding: 1rem;
+}
+
+.project-card-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.project-card-content p {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
