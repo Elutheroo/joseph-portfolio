@@ -754,3 +754,10 @@ footer {
   display: block;
   border-radius: 6px; /* optional rounded corners */
 }
+.project-card img {
+  width: 100%;
+  aspect-ratio: 2400 / 1500; /* keep correct proportion */
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+}
