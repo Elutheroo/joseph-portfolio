@@ -904,3 +904,44 @@ footer {
   transform: translateY(-5px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card-inner {
+  padding: 1rem;
+}
+
+.project-card-inner img {
+  width: 100%;
+  aspect-ratio: 2400 / 1500;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.project-card-inner h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.project-card-inner p {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
