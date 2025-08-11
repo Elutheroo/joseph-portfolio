@@ -761,3 +761,44 @@ footer {
   display: block;
   border-radius: 6px;
 }
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #111;
+  border-radius: 8px;
+  overflow: hidden; /* keeps clean edges */
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card img {
+  width: 100%;
+  aspect-ratio: 2400 / 1500; /* keeps correct proportion */
+  object-fit: cover;
+  display: block;
+}
+
+.project-card h3,
+.project-card p {
+  padding: 0 1rem; /* breathing space */
+}
+
+.project-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  color: #fff;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
