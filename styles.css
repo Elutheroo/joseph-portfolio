@@ -999,8 +999,10 @@ flex-direction: column;
 justify-content: space-between;
 gap: 1rem;
 padding: 2rem;
+border: 1px solid
 border-radius: 8px;
 color: inherit;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .body-content {
