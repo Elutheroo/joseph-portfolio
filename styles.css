@@ -996,5 +996,6 @@ footer {
 }
 
 .body-content {
+display: flex;
 flex-grow: 1;
 }
