@@ -977,7 +977,6 @@ footer {
   object-fit: cover;
   display: block;
   border-radius: 6px;
-  margin-bottom: 1rem;
 }
 
 /* Project Titles */
@@ -985,7 +984,6 @@ footer {
   font-size: 1.25rem;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 0.5rem;
 }
 
 /* Project Descriptions */
