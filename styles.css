@@ -999,8 +999,8 @@ flex-direction: column;
 justify-content: space-between;
 gap: 1rem;
 padding: 2rem;
-border: 1px solid #212121;
-border-radius: 8px;
+border: 1px solid #2b2b2b;
+border-radius: 12px;
 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
