@@ -998,3 +998,7 @@ footer {
   color: #ccc;
   line-height: 1.5;
 }
+
+.body-content {
+flex-grow: 1;
+}
