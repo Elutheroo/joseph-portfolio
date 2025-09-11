@@ -1009,3 +1009,7 @@ flex-direction: column;
 justify-content: space-between;
 gap: 1.5rem;
 }
+
+.body-content h3 {
+flex-grow: 1;
+}
