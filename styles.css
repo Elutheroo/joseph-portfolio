@@ -995,8 +995,17 @@ footer {
   line-height: 1.5;
 }
 
+.project-card-inner {
+display: flex;
+flex-direction: column;
+justify-content: space-between
+gap: 2rem;
+padding: 2rem;
+}
+
 .body-content {
 display: flex;
 flex-direction: column;
-flex-grow: 1;
+justify-content: space-between;
+gap: 1.5rem;
 }
