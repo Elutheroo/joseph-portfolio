@@ -271,6 +271,9 @@ body { padding-top: calc(var(--header-height) + 24px); padding-bottom: calc(var(
   display: inline-block;
   padding: 6px;
   transform: rotate(-135deg);
+  /* ensure the chevron is centered and uses crisp rendering */
+  box-sizing: content-box;
+  line-height: 0;
 }
 
 /* Scroll animation classes */
