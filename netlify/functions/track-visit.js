@@ -2,6 +2,7 @@
 // Purpose: Receive a POST from client when a portfolio/case-study page is viewed (organic-only)
 // - Performs light bot filtering
 // - Resolves client IP and geolocation (via ip-api.com)
+// - Persists visit and counts to Neon (Postgres) when NEON_DATABASE_URL is set
 // - Sends an email notification via Brevo (SMTP API) using BREVO_API_KEY
 
 const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
@@ -18,7 +19,7 @@ exports.handler = async (event) => {
   if (!page && !caseStudy) return json(422, { error: 'Missing page or caseStudy' });
 
   // Reject obvious bots by UA
-  const ua = (userAgent || event.headers['user-agent'] || '').toLowerCase();
+  const ua = (userAgent || (event.headers && event.headers['user-agent']) || '').toLowerCase();
   const botSignatures = ['bot', 'crawl', 'spider', 'slurp', 'bingpreview', 'mediapartners-google'];
   if (botSignatures.some(s => ua.includes(s))) return json(204, { ok: true, ignored: 'bot' });
 
@@ -36,6 +37,74 @@ exports.handler = async (event) => {
     geo = await geoRes.json();
   } catch (e) { /* ignore geo errors */ }
 
+  // Persist to Neon/Postgres if configured
+  let globalViews = null;
+  try {
+    const DATABASE_URL = process.env.NEON_DATABASE_URL || process.env.DATABASE_URL || null;
+    if (DATABASE_URL) {
+      // Attempt to require 'pg' and run DB operations
+      let { Client } = require('pg');
+      const client = new Client({ connectionString: DATABASE_URL });
+      await client.connect();
+
+      // Create tables if they don't exist (safe - idempotent)
+      await client.query(`CREATE TABLE IF NOT EXISTS case_study_counts (
+        slug TEXT PRIMARY KEY,
+        title TEXT,
+        views BIGINT DEFAULT 0,
+        updated_at TIMESTAMPTZ DEFAULT now()
+      )`);
+
+      await client.query(`CREATE TABLE IF NOT EXISTS visits (
+        id BIGSERIAL PRIMARY KEY,
+        case_study_slug TEXT,
+        case_study_title TEXT,
+        ip TEXT,
+        city TEXT,
+        region TEXT,
+        country TEXT,
+        lat DOUBLE PRECISION,
+        lon DOUBLE PRECISION,
+        isp TEXT,
+        user_agent TEXT,
+        referrer TEXT,
+        created_at TIMESTAMPTZ DEFAULT now()
+      )`);
+
+      // generate slug from title or page
+      const slug = slugify(caseStudy || page || 'page');
+
+      // upsert counter
+      const upsertRes = await client.query(`INSERT INTO case_study_counts (slug, title, views, updated_at)
+        VALUES ($1, $2, 1, now())
+        ON CONFLICT (slug) DO UPDATE SET views = case_study_counts.views + 1, updated_at = now()
+        RETURNING views`, [slug, caseStudy || page]);
+
+      if (upsertRes && upsertRes.rows && upsertRes.rows[0]) globalViews = upsertRes.rows[0].views;
+
+      // insert visit row
+      await client.query(`INSERT INTO visits (case_study_slug, case_study_title, ip, city, region, country, lat, lon, isp, user_agent, referrer)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`, [
+        slug,
+        caseStudy || page,
+        geo && geo.query ? geo.query : ip,
+        geo && geo.city ? geo.city : null,
+        geo && geo.regionName ? geo.regionName : null,
+        geo && geo.country ? geo.country : null,
+        geo && geo.lat ? geo.lat : null,
+        geo && geo.lon ? geo.lon : null,
+        geo && geo.isp ? geo.isp : null,
+        userAgent || ua || null,
+        referrer || null,
+      ]);
+
+      await client.end();
+    }
+  } catch (dbErr) {
+    // If pg isn't installed or DB error, log and continue; notification still sent
+    console.warn('Neon DB persistence skipped or failed:', dbErr && dbErr.message ? dbErr.message : dbErr);
+  }
+
   // Build email text
   const subject = `Portfolio Visit${caseStudy ? ` — ${caseStudy}` : ''}`;
   const bodyLines = [];
@@ -49,6 +118,7 @@ exports.handler = async (event) => {
   bodyLines.push(`Referrer: ${referrer || 'direct / none'}`);
   bodyLines.push(`User Agent: ${userAgent || ua || 'unknown'}`);
   bodyLines.push(`Visitor view count (this browser): ${typeof visitorCount !== 'undefined' ? visitorCount : 'unknown'}`);
+  if (globalViews !== null) bodyLines.push(`Total views (all visitors): ${globalViews}`);
   bodyLines.push('---');
   bodyLines.push(`Timestamp: ${new Date().toISOString()}`);
 
@@ -95,4 +165,8 @@ function getClientIP(event) {
   const forwarded = headers['x-forwarded-for'] || headers['X-Forwarded-For'] || headers['x-nf-client-connection-ip'];
   if (forwarded) return forwarded.split(',')[0].trim();
   return null;
+}
+
+function slugify(str){
+  return String(str || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || 'page';
 }
