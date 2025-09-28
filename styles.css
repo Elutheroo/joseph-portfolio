@@ -321,7 +321,7 @@ form button {
 .overlay-close-icon {
   position: absolute;
   top: 8px;
-  right: 12px;
+  right: 16px; /* slightly farther from edge to keep gap */
   background: transparent;
   border: none;
   padding: 6px;
@@ -333,6 +333,15 @@ form button {
 
 /* Center the "Urgent?" line as requested */
 .overlay-urgent { text-align: center; }
+
+/* Ensure the primary heading has space on the right so the close icon doesn't overlap. */
+.form-overlay-card h3 {
+  padding-right: 56px; /* reserve space for close icon + 16px gap */
+}
+
+/* Align leading icon inside primary buttons */
+.btn-primary .icon-leading { margin-right: 12px; display: inline-flex; align-items: center; justify-content: center; }
+.btn-primary span { display: inline-block; vertical-align: middle; }
 
 .form-overlay-card h3 { margin: 4px 0 12px 0; color: #fff; font-size: 1.3rem; font-weight: 800; }
 .form-overlay-card p { color: #d6d6d6; margin: 0 0 8px 0; }
