@@ -112,14 +112,32 @@ nav a:hover {
   text-decoration: underline;
 }
 .resume-btn {
-  background: var(--primary-gradient);
+  /* Match outlined style used for resume-download */
+  background: transparent;
   padding: 8px 14px;
   border-radius: 20px;
-  color: #fff;
+  color: var(--primary-color);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  border: 2px solid var(--primary-color);
+  font-weight: 700;
+}
+
+/* Ensure header icon follows button color */
+.resume-btn svg path { stroke: currentColor; }
+
+/* Mobile / hamburger: make resume button span full width inside the dropdown nav */
+@media (max-width: 768px) {
+  nav.active .resume-btn {
+    display: block;
+    width: calc(100% - (var(--surface-horizontal-padding, 16px) * 2));
+    margin: 8px auto;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
 }
 
 /* Hero */
