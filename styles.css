@@ -280,20 +280,26 @@ form button {
 .btn-primary { background: var(--primary-gradient); color: #fff; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
 .btn-ghost { background: transparent; color: #cfcfcf; border: 1px solid rgba(255,255,255,0.04); padding: 10px 12px; border-radius: 8px; cursor: pointer; }
 
+/* Resume download (outlined) - higher specificity to avoid accidental overrides */
+#resume .resume-download,
 .resume-download {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 20px;
-  background: transparent; /* outlined style */
-  color: var(--primary-color);
-  border-radius: 12px;
-  border: 2px solid var(--primary-color);
-  text-align: center;
-  margin: 0 auto;
-  font-weight: 700;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 12px 20px !important;
+  background: transparent !important; /* outlined style */
+  color: var(--primary-color) !important;
+  border-radius: 12px !important;
+  border: 2px solid var(--primary-color) !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
 }
+
+/* ensure icon inherits button color */
+#resume .resume-download svg path, .resume-download svg path { stroke: currentColor !important; }
 
 /* ensure icon inherits button color */
 .resume-download svg path { stroke: currentColor; }
