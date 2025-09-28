@@ -245,19 +245,24 @@ body { padding-top: calc(var(--header-height) + 24px); padding-bottom: calc(var(
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background: #158C62;
+  background: linear-gradient(90deg, #158C62, #1cbf85);
   color: #ffffff;
   border: none;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%; /* circular */
   cursor: pointer;
-  display: none;
+  display: none; /* shown via JS when needed */
   z-index: 999;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 0;
+  box-shadow: 0 8px 20px rgba(21,140,98,0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.2s ease;
 }
+
+#backToTop:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(21,140,98,0.22); }
 
 #backToTop::before {
   content: "";
