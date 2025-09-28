@@ -205,9 +205,12 @@ form button {
 }
 
 .resume-download {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   padding: 12px 20px;
-  background: linear-gradient(90deg, #158C62, #1cbf85);
+  background: var(--primary-gradient);
   color: white;
   border-radius: 12px; /* slightly more rounded to match header style */
   text-align: center;
