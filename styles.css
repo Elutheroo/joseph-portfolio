@@ -297,20 +297,28 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  position: relative; /* allow badge to be positioned on edge */
+  padding-right: 40px; /* space for badge to overlap */
+  overflow: visible;
 }
 
 .tools-list .ai-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: #fff;
-  padding: 3px 6px;
+  padding: 6px 8px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(90deg, #00ffb3, #00e5ff, #7f00ff); /* neon gradient */
+  position: absolute;
+  right: -12px; /* overlap the right edge */
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 6px 18px rgba(0,255,180,0.12), 0 0 18px rgba(0,230,255,0.08);
+  z-index: 30;
+  overflow: visible;
 }
 
 /* shining gradient effect */
@@ -321,10 +329,15 @@ footer {
   left: -30%;
   width: 60%;
   height: 200%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.25) 100%);
+  background: linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.35) 100%);
   transform: rotate(25deg);
-  opacity: 0.35;
+  opacity: 0.45;
   animation: shine 2.2s linear infinite;
+}
+
+@media (max-width: 600px) {
+  .tools-list li { padding-right: 34px; }
+  .tools-list .ai-badge { right: -8px; }
 }
 
 @keyframes shine {
