@@ -308,10 +308,11 @@ form button {
 @media (max-width: 600px) {
   .resume-download {
     display: block;
-    /* respect page gutters: fill available content width but keep horizontal padding */
-    width: calc(100% - (var(--content-padding) * 2));
-    max-width: 100%;
-    margin: 0 auto;
+    /* inset 24px from viewport edges on mobile */
+    width: calc(100vw - 48px);
+    max-width: calc(100vw - 48px);
+    margin-left: 24px;
+    margin-right: 24px;
     padding: 14px 18px;
     border-radius: 8px;
     box-sizing: border-box;
