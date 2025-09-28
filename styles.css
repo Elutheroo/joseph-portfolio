@@ -1100,7 +1100,8 @@ body { padding-top: calc(var(--header-height) + 24px); }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 20; /* lift above siblings so rounded corners and shadow are visible */
 }
 .projects-grid {
   display: flex;
@@ -1146,7 +1147,8 @@ body { padding-top: calc(var(--header-height) + 24px); }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 20; /* lift above siblings so rounded corners and shadow are visible */
 }
 
 /* Optional: Hide scrollbar on WebKit browsers */
@@ -1197,7 +1199,8 @@ body { padding-top: calc(var(--header-height) + 24px); }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 20; /* lift above siblings so rounded corners and shadow are visible */
 }
 
 .project-card p {
@@ -1208,7 +1211,8 @@ body { padding-top: calc(var(--header-height) + 24px); }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 20; /* lift above siblings so rounded corners and shadow are visible */
 }
 
 /* Optional: Hide scrollbar on WebKit browsers */
@@ -1268,7 +1272,8 @@ body { padding-top: calc(var(--header-height) + 24px); }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 20; /* lift above siblings so rounded corners and shadow are visible */
 }
 .projects-grid {
   display: grid;
@@ -1323,7 +1328,8 @@ body { padding-top: calc(var(--header-height) + 24px); }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 20; /* lift above siblings so rounded corners and shadow are visible */
 }
 
 .project-card img {
