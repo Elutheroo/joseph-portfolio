@@ -77,6 +77,8 @@ section {
 
 .header-bar { padding: 8px var(--surface-horizontal-padding); }
 
+:root { --primary-color: #158C62; --primary-gradient: linear-gradient(90deg, var(--primary-color), #1cbf85); }
+
 /* Ensure page content clears the floating header */
 body { padding-top: calc(var(--header-height) + 24px); }
 
