@@ -372,10 +372,16 @@ window.addEventListener('load', () => {
   });
 
   // overlay interactions
-  if (overlayClose) overlayClose.addEventListener('click', () => {
+  if (overlayCloseIcon) overlayCloseIcon.addEventListener('click', () => {
     overlay.classList.add('hidden');
     overlay.setAttribute('aria-hidden', 'true');
   });
+  if (overlayClose) {
+    overlayClose.addEventListener('click', () => {
+      overlay.classList.add('hidden');
+      overlay.setAttribute('aria-hidden', 'true');
+    });
+  }
   if (overlayCall) overlayCall.addEventListener('click', () => {
     window.location.href = 'tel:+2347014877302';
   });
