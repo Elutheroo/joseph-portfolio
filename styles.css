@@ -320,15 +320,19 @@ form button {
 /* Close icon in top-right */
 .overlay-close-icon {
   position: absolute;
-  top: 12px;
+  top: 8px;
   right: 12px;
   background: transparent;
   border: none;
   padding: 6px;
   border-radius: 6px;
   cursor: pointer;
+  z-index: 3; /* ensure it sits above card contents */
 }
 .overlay-close-icon:hover { background: rgba(255,255,255,0.02); }
+
+/* Center the "Urgent?" line as requested */
+.overlay-urgent { text-align: center; }
 
 .form-overlay-card h3 { margin: 4px 0 12px 0; color: #fff; font-size: 1.3rem; font-weight: 800; }
 .form-overlay-card p { color: #d6d6d6; margin: 0 0 8px 0; }
