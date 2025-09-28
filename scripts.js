@@ -226,7 +226,7 @@ if (document.fonts && document.fonts.ready) {
     overlay.setAttribute('aria-hidden', 'true');
   });
   if (overlayCall) overlayCall.addEventListener('click', () => {
-    window.location.href = 'tel:+2337014877302';
+    window.location.href = 'tel:+2347014877302';
   });
 
   // close overlay when clicking outside card
