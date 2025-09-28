@@ -22,10 +22,15 @@ a {
 ul {
   list-style: none;
 }
+:root {
+  --content-max-width: 1000px;
+  --content-padding: 20px;
+}
 section {
-  padding: 80px 20px;
-  max-width: 1000px;
-  margin: auto;
+  padding: 80px var(--content-padding);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* Header */
@@ -44,13 +49,13 @@ section {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1000px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: 20px; /* preserves vertical spacing and matches section horizontal padding */
+  padding: var(--content-padding);
 }
 
 @media (min-width: 1200px) {
-  .header-bar { max-width: 1200px; }
+  :root { --content-max-width: 1200px; }
 }
 .sticky-header .logo {
   font-size: 1.4rem;
@@ -365,8 +370,11 @@ footer {
 }
 
 @media (min-width: 1200px) {
+  :root { --content-max-width: 1200px; }
+
   #services {
-    max-width: 1200px;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
   }
 
   .service-grid {
