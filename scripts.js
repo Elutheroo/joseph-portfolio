@@ -6,51 +6,51 @@ const backToTopBtn = document.getElementById('backToTop');
   const home = document.getElementById('home');
   if (!backToTopBtn) return;
 
+  let heroVisible = true;
+  let lastY = window.scrollY || 0;
+  let ticking = false;
+
+  function show() { backToTopBtn.classList.add('visible'); }
+  function hide() { backToTopBtn.classList.remove('visible'); }
+
   if (home && 'IntersectionObserver' in window) {
-    // observe hero visibility; when hero is not intersecting, show the button
+    // observe hero visibility; do not auto-show on intersection change — only show when user scrolls up
     const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          backToTopBtn.classList.remove('visible');
-        } else {
-          backToTopBtn.classList.add('visible');
-        }
+        heroVisible = entry.isIntersecting;
+        if (heroVisible) hide();
       });
     }, { root: null, threshold: 0.05 });
 
     io.observe(home);
-
-    // keep a fallback in case the observer becomes disconnected (e.g., browser tab hidden)
-    window.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        // force check
-        const rect = home.getBoundingClientRect();
-        const visible = rect.top < window.innerHeight && rect.bottom > 0;
-        if (visible) backToTopBtn.classList.remove('visible'); else backToTopBtn.classList.add('visible');
-      }
-    });
   } else {
-    // Fallback: use scroll threshold if hero not present
-    function getAboveFoldThreshold() {
-      const homeEl = document.getElementById('home');
-      if (homeEl) {
-        return Math.max( Math.min(homeEl.offsetHeight - 40, window.innerHeight * 0.9), window.innerHeight * 0.25 );
-      }
-      return window.innerHeight * 0.5;
-    }
-
-    let currentThreshold = getAboveFoldThreshold();
-    window.addEventListener('resize', () => { currentThreshold = getAboveFoldThreshold(); });
-
-    window.addEventListener('scroll', () => {
-      const sc = window.scrollY || window.pageYOffset;
-      if (sc > currentThreshold) backToTopBtn.classList.add('visible'); else backToTopBtn.classList.remove('visible');
-    }, { passive: true });
+    // fallback if no hero or observer
+    heroVisible = (window.scrollY < (window.innerHeight * 0.5));
   }
 
-  // Scroll to top smoothly when button is clicked
+  function handleScroll() {
+    const y = window.scrollY || 0;
+    const scrolledUp = y < lastY;
+    lastY = y;
+
+    // Never show when hero is visible
+    if (heroVisible) { hide(); return; }
+
+    // Only show when user scrolls upward and has scrolled down some amount
+    if (scrolledUp && y > 150) show(); else hide();
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { handleScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // When clicking the button, scroll to top and hide it
   backToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    hide();
   });
 })();
 
