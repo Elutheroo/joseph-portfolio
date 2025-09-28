@@ -208,13 +208,36 @@ form button {
   margin: 0 auto; /* ensure centered when treated as block-level */
 }
 
-/* Footer */
+/* Footer (floating surface) */
 footer {
-  text-align: center;
-  padding: 40px 20px;
+  position: fixed;
+  bottom: 16px;
+  left: var(--content-padding);
+  right: var(--content-padding);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(6px);
+  border-radius: 9999px; /* fully rounded */
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+  padding: 10px 14px;
   font-size: 0.9rem;
-  background: #0d0d0d;
-  border-top: 1px solid #222;
+  z-index: 900;
+  text-align: center;
+}
+
+/* Ensure content clears floating header and footer */
+body { padding-top: calc(var(--header-height) + 24px); padding-bottom: calc(var(--footer-height, 64px) + 24px); }
+
+@media (min-width: 600px) {
+  :root { --footer-height: 64px; }
+  footer { bottom: 24px; }
+}
+
+@media (min-width: 1200px) {
+  :root { --footer-height: 72px; }
+  footer { bottom: 32px; }
 }
 
 /* Back to Top */
