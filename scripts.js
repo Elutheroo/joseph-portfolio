@@ -86,14 +86,25 @@ const backToTopBtn = document.getElementById('backToTop');
   }, { passive: true });
 })();
 
-// Scroll reveal animation
+// Scroll reveal animation (sections + hero images)
 const animatedSections = document.querySelectorAll('section');
 
 const observer = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        // reveal section
         entry.target.classList.add('visible');
+
+        // animate any showcase/hero images inside the section to "come up"
+        const imgs = entry.target.querySelectorAll('.showcase img, .cs-hero-img img, .hero-img img, .hifi-showcase img, .case-slide .showcase img');
+        imgs.forEach((img, idx) => {
+          // ensure the element will animate from below into place
+          img.classList.add('fade-up');
+          // apply a small stagger for multiple images
+          img.style.animationDelay = (idx * 0.08) + 's';
+        });
+
         observer.unobserve(entry.target);
       }
     });
@@ -105,6 +116,52 @@ animatedSections.forEach(section => {
   section.classList.add('hidden');
   observer.observe(section);
 });
+
+
+// Header hide on scroll for case study pages
+(function caseStudyHeaderHide(){
+  if (!document.querySelector('.case-study')) return; // only run on case study pages
+  const header = document.querySelector('.sticky-header');
+  if (!header) return;
+
+  let lastY = window.scrollY || 0;
+  let ticking = false;
+  let hidden = false;
+
+  function showHeader() {
+    if (hidden) {
+      header.classList.remove('header-hidden');
+      hidden = false;
+    }
+  }
+  function hideHeader() {
+    if (!hidden) {
+      header.classList.add('header-hidden');
+      hidden = true;
+    }
+  }
+
+  function onScroll() {
+    const y = window.scrollY || 0;
+    const scrollingUp = y < lastY;
+    const scrollingDown = y > lastY;
+    lastY = y;
+
+    // Always show near top
+    if (y < 60) { showHeader(); return; }
+
+    // when scrolling down, hide; when scrolling up, show
+    if (scrollingDown && y > 120) hideHeader();
+    else if (scrollingUp) showHeader();
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { onScroll(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
 // Toggle mobile menu
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
