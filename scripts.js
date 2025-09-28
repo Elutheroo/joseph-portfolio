@@ -301,6 +301,9 @@ window.addEventListener('load', () => {
   form.addEventListener('submit', function(e){
     e.preventDefault();
 
+    const submitBtn = form.querySelector('[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+
     const formData = new FormData(form);
     const name = (formData.get('name') || '').toString().trim();
     const email = (formData.get('email') || '').toString().trim();
@@ -309,6 +312,7 @@ window.addEventListener('load', () => {
 
     // simple validation (HTML required already enforces, but double-check)
     if (!name || !email || !subject || !message) {
+      if (submitBtn) submitBtn.disabled = false;
       // focus first empty
       if (!name) form.querySelector('[name="name"]').focus();
       else if (!email) form.querySelector('[name="email"]').focus();
@@ -317,31 +321,52 @@ window.addEventListener('load', () => {
       return;
     }
 
-    // send form data to server endpoint (requires a backend or third-party endpoint)
-    const endpoint = '/.netlify/functions/send-email';
+    // Prepare payload for serverless email function
     const payload = { name, email, subject, message };
+    const emailEndpoint = '/.netlify/functions/send-email';
 
-    fetch(endpoint, {
+    // Submit to Netlify Forms (so Netlify stores the submission)
+    const netlifySubmit = fetch('/', {
+      method: 'POST',
+      body: formData,
+    }).then(res => res.ok).catch(() => false);
+
+    // Send email notification via serverless function
+    const emailSend = fetch(emailEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }).then(async res => {
-      if (res.ok) {
-        // show success overlay
+      if (res.ok) return { ok: true };
+      let text = await res.text().catch(() => 'Server error');
+      return { ok: false, error: text };
+    }).catch(err => ({ ok: false, error: String(err) }));
+
+    Promise.all([netlifySubmit, emailSend]).then(async results => {
+      const [netlifyOk, emailRes] = results;
+
+      if (emailRes && emailRes.ok) {
+        // Prefer to show overlay when email notification succeeded
+        if (overlay) {
+          overlay.classList.remove('hidden');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
+        form.reset();
+      } else if (netlifyOk) {
+        // If email failed but Netlify stored submission, still show overlay but warn in console
+        console.warn('Email send failed but Netlify form saved the submission', emailRes && emailRes.error);
         if (overlay) {
           overlay.classList.remove('hidden');
           overlay.setAttribute('aria-hidden', 'false');
         }
         form.reset();
       } else {
-        // server responded with error
-        const text = await res.text().catch(() => 'Server error');
-        alert('Could not send message: ' + text);
+        // Both failed
+        alert('Could not send message. Please try again later.');
+        console.error('Form submission failed', emailRes && emailRes.error);
       }
-    }).catch(err => {
-      // network or CORS error
-      console.error('Contact send failed', err);
-      alert('Could not send message from this site. Please check your server or connect a form service.');
+    }).finally(() => {
+      if (submitBtn) submitBtn.disabled = false;
     });
   });
 
