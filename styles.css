@@ -453,6 +453,15 @@ body { padding-top: calc(var(--header-height) + 24px); }
   padding: 8px var(--surface-horizontal-padding);
 }
 
+/* Prevent footer text from wrapping into a second line; ellipsize if needed */
+.footer-bar p {
+  margin: 0;
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Ensure the resume-like button (if present) aligns like header items */
 .footer-bar .resume-download,
 .footer-bar #backToTop {
