@@ -190,13 +190,15 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 140px;
+  height: 100%; /* fill the grid row */
+  min-height: 0; /* allow proper stretching inside grid */
 }
 
 .testimonial-item blockquote {
   margin: 0 0 8px 0;
   font-style: italic;
   color: #e6e6e6;
+  flex: 1 1 auto; /* take remaining vertical space */
 }
 
 .testimonial-author {
@@ -210,7 +212,8 @@ nav a:hover {
 @media (min-width: 768px) {
   .testimonial-carousel {
     grid-template-columns: repeat(3, 1fr);
-    align-items: start;
+    grid-auto-rows: 1fr; /* ensure equal height rows */
+    align-items: stretch;
   }
 }
 
