@@ -266,14 +266,70 @@ footer {
   max-width: var(--content-max-width);
   margin: 48px auto 32px; /* sits near page bottom with breathing room */
   background: rgba(13,13,13,0.92);
-  backdrop-filter: blur(4px);
-  border-radius: 28px; /* rounded but less extreme to suit block flow */
+  backdrop-filter: blur(6px);
+  border-radius: 9999px; /* fully rounded to match header */
   border: 1px solid rgba(255,255,255,0.04);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   padding: 10px 14px;
   font-size: 0.9rem;
   z-index: 10;
   text-align: center;
+}
+
+/* Tools list styles */
+.tools-used { margin-top: 40px; text-align: left; }
+.tools-used h3 { font-family: 'Poppins', sans-serif; margin-bottom: 20px; font-size: 1.4rem; color: var(--primary-color); }
+.tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+}
+.tools-list li {
+  background: #1c1c1c;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  border: 1px solid #2b2b2b;
+  color: #eee;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tools-list .ai-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  position: relative;
+  overflow: hidden;
+}
+
+/* shining gradient effect */
+.tools-list .ai-badge::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.25) 100%);
+  transform: rotate(25deg);
+  opacity: 0.35;
+  animation: shine 2.2s linear infinite;
+}
+
+@keyframes shine {
+  from { transform: translateX(-120%) rotate(25deg); }
+  to { transform: translateX(220%) rotate(25deg); }
 }
 
 /* Ensure content clears fixed header only (footer flows naturally) */
