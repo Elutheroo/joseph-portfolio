@@ -33,12 +33,24 @@ section {
   position: sticky;
   top: 0;
   background: #0d0d0d;
+  padding: 0; /* horizontal spacing handled by .header-bar */
+  z-index: 1000;
+  border-bottom: 1px solid #222;
+}
+
+/* Header inner container aligns with page sections */
+.header-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  z-index: 1000;
-  border-bottom: 1px solid #222;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px; /* preserves vertical spacing and matches section horizontal padding */
+}
+
+@media (min-width: 1200px) {
+  .header-bar { max-width: 1200px; }
 }
 .sticky-header .logo {
   font-size: 1.4rem;
