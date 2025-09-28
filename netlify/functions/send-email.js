@@ -61,6 +61,41 @@ exports.handler = async (event, context) => {
 
   if (!BREVO_API_KEY) return json(500, { error: 'Server not configured' });
 
+  // Build request body for API or prepare SMTP send
+  const SMTP_HOST = process.env.SMTP_HOST;
+  const SMTP_PORT = process.env.SMTP_PORT || '587';
+  const SMTP_USER = process.env.SMTP_USER;
+  const SMTP_PASS = process.env.SMTP_PASS;
+
+  // If SMTP env vars are provided, prefer SMTP transport (nodemailer)
+  if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
+    try {
+      const nodemailer = require('nodemailer');
+      const transporter = nodemailer.createTransport({
+        host: SMTP_HOST,
+        port: Number(SMTP_PORT) || 587,
+        secure: Number(SMTP_PORT) === 465, // true for 465, false for other ports
+        auth: { user: SMTP_USER, pass: SMTP_PASS },
+      });
+
+      const mailOptions = {
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: TO_EMAIL,
+        subject: `[Portfolio Contact] ${subjectT}`,
+        text: `Name: ${nameT}\nEmail: ${emailT}\n\n${messageT}`,
+        replyTo: emailT,
+      };
+
+      const info = await transporter.sendMail(mailOptions);
+      // nodemailer info may include messageId and response
+      return json(200, { ok: true, info: { messageId: info && info.messageId ? info.messageId : null, response: info && info.response ? info.response : null } });
+    } catch (smtpErr) {
+      console.error('SMTP send failed', smtpErr && smtpErr.message ? smtpErr.message : smtpErr);
+      return json(500, { error: 'Failed to send email via SMTP', detail: String(smtpErr && smtpErr.message ? smtpErr.message : smtpErr) });
+    }
+  }
+
+  // Fallback to Brevo API (SMTP API endpoint) if SMTP not configured
   // Build request body. Prefer template usage to avoid raw HTML.
   let requestBody;
   if (BREVO_TEMPLATE_ID) {
