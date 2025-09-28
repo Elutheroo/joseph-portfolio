@@ -6,6 +6,8 @@
       <stop offset="100%" stop-color="#1cbf85" />
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="96" ry="96" fill="url(#g)" />
-  <text x="50%" y="52%" text-anchor="middle" fill="#fff" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="260">J</text>
+  <!-- circular background -->
+  <circle cx="256" cy="256" r="256" fill="url(#g)" />
+  <!-- Centered letter J using Verdana, vertically centered -->
+  <text x="50%" y="50%" text-anchor="middle" fill="#ffffff" font-family="Verdana, Arial, sans-serif" font-weight="700" font-size="260" dominant-baseline="central">J</text>
 </svg>
