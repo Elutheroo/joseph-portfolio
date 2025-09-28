@@ -165,6 +165,27 @@ if (document.fonts && document.fonts.ready) {
   if (el) el.textContent = y;
 })();
 
+// Ensure images are optimized: default lazy loading for non-hero images
+(function optimizeImages() {
+  try {
+    const imgs = document.querySelectorAll('img');
+    imgs.forEach(img => {
+      if (!img.hasAttribute('loading')) {
+        // keep hero images eager
+        if (img.closest('.cs-hero, .hero, .cs-hero-img, .hero-img')) img.setAttribute('loading', 'eager');
+        else img.setAttribute('loading', 'lazy');
+      }
+      if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+      // ensure responsive behavior
+      img.style.maxWidth = img.style.maxWidth || '100%';
+      img.style.height = img.style.height || 'auto';
+    });
+  } catch (e) {
+    // no-op
+    console.warn('Image optimization init failed', e);
+  }
+})();
+
 // Contact form handling: validate, open mail client and show custom overlay
 (function contactFormHandler(){
   const form = document.getElementById('contactForm');
