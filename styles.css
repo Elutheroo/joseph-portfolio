@@ -1218,15 +1218,15 @@ body { padding-top: calc(var(--header-height) + 24px); }
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1.75rem;
-  padding-top: 1.5rem;
+  padding: 1rem 0 0 0;
 }
 
 .project-card h3 {
   font-size: 1.25rem;
   font-weight: 600;
   color: #fff;
-  margin: 0;
+  margin: 0 0 0.5rem 0;
+  text-align: left;
 }
 
 .project-card p {
@@ -1234,4 +1234,35 @@ body { padding-top: calc(var(--header-height) + 24px); }
   color: #ccc;
   line-height: 1.5;
   margin: 0;
+  text-align: left;
+}
+
+/* New layout: unify card inner padding so image and text share the same left edge */
+:root { --project-gutter: 1.75rem; }
+.projects-grid .project-card {
+  padding: var(--project-gutter);
+  box-sizing: border-box;
+}
+
+.projects-grid .project-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0; /* remove centering */
+  border-radius: 8px;
+}
+
+.projects-grid .project-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (min-width: 768px) {
+  :root { --project-gutter: 2rem; }
+  .projects-grid .project-card { padding: var(--project-gutter); }
+}
+
+@media (max-width: 480px) {
+  :root { --project-gutter: 1rem; }
+  .projects-grid .project-card { padding: var(--project-gutter); }
 }
