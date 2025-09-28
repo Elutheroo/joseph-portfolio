@@ -543,5 +543,29 @@ window.addEventListener('load', () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     }).catch(err => { /* fail silently */ console.warn('visit ping failed', err); });
+
+    // Also submit a hidden Netlify form to trigger Netlify email notifications (if enabled)
+    try {
+      // attempt to fetch geo on client to include in the Netlify form submission
+      fetch('http://ip-api.com/json/?fields=status,country,regionName,city,query').then(r => r.json()).then(geo => {
+        try {
+          const form = document.querySelector('form[name="visit-notify"]');
+          if (form) {
+            form.querySelector('[name="page"]').value = payload.page || '';
+            form.querySelector('[name="caseStudy"]').value = payload.caseStudy || '';
+            form.querySelector('[name="referrer"]').value = payload.referrer || '';
+            form.querySelector('[name="ip"]').value = geo && geo.query ? geo.query : '';
+            form.querySelector('[name="city"]').value = geo && geo.city ? geo.city : '';
+            form.querySelector('[name="region"]').value = geo && geo.regionName ? geo.regionName : '';
+            form.querySelector('[name="country"]').value = geo && geo.country ? geo.country : '';
+            form.querySelector('[name="userAgent"]').value = payload.userAgent || '';
+
+            // submit the form to Netlify
+            const fd = new FormData(form);
+            fetch('/', { method: 'POST', body: fd }).catch(()=>{});
+          }
+        } catch (e) { /* ignore */ }
+      }).catch(()=>{});
+    } catch (e) { /* ignore */ }
   } catch (e) { /* ignore */ }
 })();
