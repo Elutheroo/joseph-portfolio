@@ -372,6 +372,14 @@ body { padding-top: calc(var(--header-height) + 24px); }
   z-index: 1100;
 }
 
+/* On mobile place the button above the footer (16px gap) and near content edge */
+@media (max-width: 600px) {
+  #backToTop {
+    bottom: calc(var(--footer-height, 64px) + 16px);
+    right: calc(var(--surface-horizontal-padding, 16px) + 8px);
+  }
+}
+
 #backToTop:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(21,140,98,0.22); }
 
 #backToTop::before {
