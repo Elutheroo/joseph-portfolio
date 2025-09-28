@@ -74,6 +74,14 @@ section {
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   padding: 0; /* inner spacing handled by .header-bar */
   z-index: 1000;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+
+/* When header is hidden (scrolling down) move it out of view */
+.sticky-header.header-hidden {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .header-bar { padding: 8px var(--surface-horizontal-padding, 16px); }
