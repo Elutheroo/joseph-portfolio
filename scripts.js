@@ -193,7 +193,7 @@ if (document.fonts && document.fonts.ready) {
     }
 
     // send form data to server endpoint (requires a backend or third-party endpoint)
-    const endpoint = '/api/contact';
+    const endpoint = '/.netlify/functions/send-email';
     const payload = { name, email, subject, message };
 
     fetch(endpoint, {
