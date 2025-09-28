@@ -208,36 +208,33 @@ form button {
   margin: 0 auto; /* ensure centered when treated as block-level */
 }
 
-/* Footer (floating surface) */
+/* Footer (surface, non-fixed so it sits at page bottom in normal flow) */
 footer {
-  position: fixed;
-  bottom: 16px;
-  left: var(--content-padding);
-  right: var(--content-padding);
+  position: relative; /* non-fixed */
   max-width: var(--content-max-width);
-  margin: 0 auto;
+  margin: 48px auto 32px; /* sits near page bottom with breathing room */
   background: rgba(13,13,13,0.92);
-  backdrop-filter: blur(6px);
-  border-radius: 9999px; /* fully rounded */
+  backdrop-filter: blur(4px);
+  border-radius: 28px; /* rounded but less extreme to suit block flow */
   border: 1px solid rgba(255,255,255,0.04);
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
   padding: 10px 14px;
   font-size: 0.9rem;
-  z-index: 900;
+  z-index: 10;
   text-align: center;
 }
 
-/* Ensure content clears floating header and footer */
-body { padding-top: calc(var(--header-height) + 24px); padding-bottom: calc(var(--footer-height, 64px) + 24px); }
+/* Ensure content clears fixed header only (footer flows naturally) */
+body { padding-top: calc(var(--header-height) + 24px); }
 
 @media (min-width: 600px) {
   :root { --footer-height: 64px; }
-  footer { bottom: 24px; }
+  footer { margin-top: 64px; }
 }
 
 @media (min-width: 1200px) {
   :root { --footer-height: 72px; }
-  footer { bottom: 32px; }
+  footer { margin-top: 72px; }
 }
 
 /* Back to Top (now placed inside footer) */
