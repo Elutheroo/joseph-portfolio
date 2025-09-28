@@ -1,71 +1,123 @@
 // Netlify Function: send email via Brevo (Sendinblue) API
+// Adds server-side validation, light rate-limiting, and supports using a Brevo template (if BREVO_TEMPLATE_ID is set).
+
+// Simple in-memory rate limiter (per IP) - survives warm invocations but not cold starts
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_MAX = 20; // max requests per IP per window
+const ipCounters = new Map();
+
 exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+    return json(405, { error: 'Method Not Allowed' });
   }
 
   let payload;
   try {
     payload = JSON.parse(event.body);
   } catch (err) {
-    return { statusCode: 400, body: 'Invalid JSON' };
+    return json(400, { error: 'Invalid JSON' });
   }
 
-  const { name, email, subject, message } = payload || {};
+  const { name, email, subject, message } = (payload || {});
+
+  // Basic required checks
   if (!name || !email || !subject || !message) {
-    return { statusCode: 422, body: 'Missing required fields' };
+    return json(422, { error: 'Missing required fields' });
   }
 
+  // Trim and limit lengths
+  const nameT = String(name).trim();
+  const emailT = String(email).trim();
+  const subjectT = String(subject).trim();
+  const messageT = String(message).trim();
+
+  if (nameT.length > 100) return json(422, { error: 'Name too long (max 100 chars)' });
+  if (subjectT.length > 150) return json(422, { error: 'Subject too long (max 150 chars)' });
+  if (messageT.length > 5000) return json(422, { error: 'Message too long (max 5000 chars)' });
+
+  // Email format check
+  if (!isValidEmail(emailT)) return json(422, { error: 'Invalid email address' });
+
+  // Rate limiting
+  const ip = getClientIP(event) || 'unknown';
+  const now = Date.now();
+  const entry = ipCounters.get(ip) || { count: 0, windowStart: now };
+  if (now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
+    entry.count = 0;
+    entry.windowStart = now;
+  }
+  entry.count += 1;
+  ipCounters.set(ip, entry);
+  if (entry.count > RATE_LIMIT_MAX) {
+    return json(429, { error: 'Too many requests. Please try again later.' });
+  }
+
+  // Prepare Brevo payload
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
   const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@example.com';
   const FROM_NAME = process.env.FROM_NAME || 'Portfolio Contact';
   const TO_EMAIL = process.env.TO_EMAIL || 'olapagbojoseph@gmail.com';
+  const BREVO_TEMPLATE_ID = process.env.BREVO_TEMPLATE_ID; // optional
 
-  if (!BREVO_API_KEY) {
-    console.error('BREVO_API_KEY not configured');
-    return { statusCode: 500, body: 'BREVO_API_KEY is not configured on the server.' };
+  if (!BREVO_API_KEY) return json(500, { error: 'Server not configured' });
+
+  // Build request body. Prefer template usage to avoid raw HTML.
+  let requestBody;
+  if (BREVO_TEMPLATE_ID) {
+    // Use templateId and params
+    requestBody = {
+      templateId: Number(BREVO_TEMPLATE_ID),
+      to: [{ email: TO_EMAIL }],
+      params: {
+        name: nameT,
+        email: emailT,
+        subject: subjectT,
+        message: messageT,
+      },
+      replyTo: { email: emailT },
+      sender: { name: FROM_NAME, email: FROM_EMAIL },
+    };
+  } else {
+    // Fallback to text-only request (no raw HTML)
+    requestBody = {
+      sender: { name: FROM_NAME, email: FROM_EMAIL },
+      to: [{ email: TO_EMAIL }],
+      subject: `[Portfolio Contact] ${subjectT}`,
+      textContent: `Name: ${nameT}\nEmail: ${emailT}\n\n${messageT}`,
+      replyTo: { email: emailT },
+    };
   }
 
-  const apiUrl = 'https://api.brevo.com/v3/smtp/email';
-
-  const htmlContent = `<p><strong>Name:</strong> ${escapeHtml(name)}</p>
-  <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-  <p><strong>Message:</strong></p>
-  <p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>`;
-
-  const textContent = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-
-  const body = {
-    sender: { name: FROM_NAME, email: FROM_EMAIL },
-    to: [{ email: TO_EMAIL }],
-    subject: `[Portfolio Contact] ${subject}`,
-    htmlContent,
-    textContent,
-    replyTo: { email },
-  };
-
   try {
-    const res = await fetch(apiUrl, {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'api-key': BREVO_API_KEY,
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(requestBody),
     });
 
-    if (res.ok) {
-      return { statusCode: 200, body: JSON.stringify({ ok: true }) };
-    }
-
-    const text = await res.text();
-    console.error('Brevo API error:', res.status, text);
-    return { statusCode: 500, body: 'Failed to send email via Brevo' };
+    if (res.ok) return json(200, { ok: true });
+    const text = await res.text().catch(() => 'unknown error');
+    console.error('Brevo error', res.status, text);
+    return json(500, { error: 'Failed to send email' });
   } catch (err) {
-    console.error('Error calling Brevo API', err);
-    return { statusCode: 500, body: 'Error sending email' };
+    console.error('Brevo request failed', err);
+    return json(500, { error: 'Failed to send email' });
   }
 };
+
+// Helpers
+function json(status, obj) {
+  return { statusCode: status, body: JSON.stringify(obj) };
+}
+
+function isValidEmail(email) {
+  // simple, robust regex
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(String(email).toLowerCase());
+}
 
 function escapeHtml(str) {
   if (!str) return '';
@@ -75,4 +127,12 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+function getClientIP(event) {
+  // Try common headers
+  const headers = (event.headers || {});
+  const forwarded = headers['x-forwarded-for'] || headers['X-Forwarded-For'] || headers['x-nf-client-connection-ip'];
+  if (forwarded) return forwarded.split(',')[0].trim();
+  return null;
 }
