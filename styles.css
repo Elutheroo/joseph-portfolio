@@ -453,13 +453,20 @@ body { padding-top: calc(var(--header-height) + 24px); }
   padding: 8px var(--surface-horizontal-padding);
 }
 
-/* Prevent footer text from wrapping into a second line; ellipsize if needed */
+/* Prevent footer text from wrapping into a second line; scale font to fit instead of ellipsizing */
 .footer-bar p {
   margin: 0;
   flex: 1 1 auto;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible; /* allow overflow but keep single line */
+  text-overflow: clip;
+  font-size: clamp(0.78rem, 1.2vw, 1rem); /* shrink on small screens to avoid wrap */
+}
+
+/* If still not enough space, reduce footer padding slightly on very narrow screens */
+@media (max-width: 360px) {
+  footer { padding-left: 8px; padding-right: 8px; }
+  .footer-bar p { font-size: 0.72rem; }
 }
 
 /* Ensure the resume-like button (if present) aligns like header items */
