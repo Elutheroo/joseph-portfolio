@@ -833,22 +833,6 @@ footer {
   display: block;
 }
 
-.project-card-content {
-  padding: 1rem;
-}
-
-.project-card-content h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #fff;
-}
-
-.project-card-content p {
-  font-size: 0.95rem;
-  color: #ccc;
-}
-
 /* Projects Grid Layout */
 .projects-grid {
   display: grid;
