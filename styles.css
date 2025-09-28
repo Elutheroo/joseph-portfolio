@@ -338,6 +338,39 @@ footer {
   100% { background-position: 0% 50%; }
 }
 
+/* Project card alignment overrides — ensure image and text align by left edge */
+:root { --project-gutter: 1.75rem; }
+
+.project-card {
+  box-sizing: border-box;
+  display: block; /* ensure anchor behaves as block container */
+}
+
+.project-card img {
+  display: block;
+  width: calc(100% - (var(--project-gutter) * 2));
+  margin-left: var(--project-gutter);
+  margin-right: calc(var(--project-gutter));
+  border-radius: 8px;
+}
+
+.project-content {
+  padding-left: var(--project-gutter);
+  padding-right: var(--project-gutter);
+}
+
+/* For cards that use flex layout, ensure children stretch */
+.project-card[style*="display: flex"], .project-card.flex {
+  align-items: stretch;
+}
+
+/* Small screens: keep gutters smaller */
+@media (max-width: 480px) {
+  :root { --project-gutter: 1rem; }
+  .project-card img { width: calc(100% - (var(--project-gutter) * 2)); margin-left: var(--project-gutter); }
+  .project-content { padding-left: var(--project-gutter); padding-right: var(--project-gutter); }
+}
+
 /* Ensure content clears fixed header only (footer flows naturally) */
 body { padding-top: calc(var(--header-height) + 24px); }
 
