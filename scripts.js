@@ -281,3 +281,44 @@ window.addEventListener('load', () => {
     }
   });
 })();
+
+// Cross-page smooth scroll enhancement
+// When clicking a header nav link that points to index.html#section from another page,
+// store the target in sessionStorage and let the browser navigate. On the index page load
+// we read the stored target and perform a smooth-scroll with header offset to avoid
+// the initial jump hiding content beneath the sticky header.
+(function crossPageHashScroll(){
+  // Listen for clicks on links that point to index.html#...
+  document.addEventListener('click', function(e){
+    const a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    try {
+      const href = a.getAttribute('href') || '';
+      // Only handle internal index anchors (relative)
+      if (href.indexOf('index.html#') === 0) {
+        const hash = href.split('#')[1] || '';
+        if (hash) sessionStorage.setItem('pendingScroll', hash);
+      }
+    } catch (err) { /* ignore */ }
+  });
+
+  // On load, if there's a pending scroll target, perform a smooth scroll to it and remove flag
+  window.addEventListener('load', function(){
+    try {
+      const pending = sessionStorage.getItem('pendingScroll');
+      if (!pending) return;
+      const target = document.getElementById(pending);
+      if (!target) { sessionStorage.removeItem('pendingScroll'); return; }
+
+      const header = document.querySelector('.sticky-header');
+      const offset = header ? Math.ceil(header.getBoundingClientRect().height) + 12 : 12;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+      // run slightly after load to allow browser to settle layout
+      window.setTimeout(() => {
+        window.scrollTo({ top, behavior: 'smooth' });
+        sessionStorage.removeItem('pendingScroll');
+      }, 80);
+    } catch (e) { /* ignore */ }
+  });
+})();
