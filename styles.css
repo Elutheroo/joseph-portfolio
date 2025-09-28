@@ -1,4 +1,5 @@
 /* Reset and base styles */
+:root { --surface-horizontal-padding: 16px; --primary-color: #158C62; --primary-gradient: linear-gradient(90deg, var(--primary-color), #1cbf85); }
 * {
   margin: 0;
   padding: 0;
