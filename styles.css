@@ -174,8 +174,31 @@ nav a:hover {
 .testimonial-carousel {
   background: #1a1a1a;
   padding: 20px;
-  border-left: 5px solid #158C62;
+  border-left: 5px solid var(--primary-color);
   font-style: italic;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.testimonial-item blockquote {
+  margin: 0;
+  font-style: italic;
+  color: #e6e6e6;
+}
+
+.testimonial-author {
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-style: normal;
+}
+
+@media (min-width: 768px) {
+  .testimonial-carousel {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
 }
 
 /* Contact */
