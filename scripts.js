@@ -164,3 +164,72 @@ if (document.fonts && document.fonts.ready) {
   const el = document.getElementById('year');
   if (el) el.textContent = y;
 })();
+
+// Contact form handling: validate, open mail client and show custom overlay
+(function contactFormHandler(){
+  const form = document.getElementById('contactForm');
+  const overlay = document.getElementById('formOverlay');
+  const overlayClose = document.getElementById('overlayClose');
+  const overlayCall = document.getElementById('overlayCall');
+  if (!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const name = (formData.get('name') || '').toString().trim();
+    const email = (formData.get('email') || '').toString().trim();
+    const subject = (formData.get('subject') || '').toString().trim();
+    const message = (formData.get('message') || '').toString().trim();
+
+    // simple validation (HTML required already enforces, but double-check)
+    if (!name || !email || !subject || !message) {
+      // focus first empty
+      if (!name) form.querySelector('[name="name"]').focus();
+      else if (!email) form.querySelector('[name="email"]').focus();
+      else if (!subject) form.querySelector('[name="subject"]').focus();
+      else form.querySelector('[name="message"]').focus();
+      return;
+    }
+
+    // build mailto link to send via user's mail client
+    const to = 'olapagbojoseph@gmail.com';
+    const body = `From: ${name} <${email}>\n\n${message}\n\n--\nSite contact form`;
+    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // open mail client
+    try {
+      window.location.href = mailto;
+    } catch (err) {
+      window.open(mailto, '_blank');
+    }
+
+    // show custom overlay
+    if (overlay) {
+      overlay.classList.remove('hidden');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    // reset form after small delay
+    setTimeout(() => {
+      form.reset();
+    }, 400);
+  });
+
+  // overlay interactions
+  if (overlayClose) overlayClose.addEventListener('click', () => {
+    overlay.classList.add('hidden');
+    overlay.setAttribute('aria-hidden', 'true');
+  });
+  if (overlayCall) overlayCall.addEventListener('click', () => {
+    window.location.href = 'tel:+2337014877302';
+  });
+
+  // close overlay when clicking outside card
+  if (overlay) overlay.addEventListener('click', (ev) => {
+    if (ev.target === overlay) {
+      overlay.classList.add('hidden');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+  });
+})();
