@@ -306,22 +306,50 @@ form button {
 .form-overlay.hidden { display: none; }
 
 .form-overlay-card {
+  position: relative;
   background: rgba(13,13,13,0.96);
-  padding: 22px;
+  padding: 22px 22px 18px 22px;
   border-radius: 14px;
-  max-width: 420px;
+  max-width: 520px;
   width: calc(100% - 48px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.04);
-  text-align: center;
+  text-align: left;
 }
 
-.form-overlay-card h3 { margin: 0 0 8px 0; color: #fff; font-size: 1.25rem; }
-.form-overlay-card p { color: #d6d6d6; margin: 8px 0; }
+/* Close icon in top-right */
+.overlay-close-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.overlay-close-icon:hover { background: rgba(255,255,255,0.02); }
 
-.overlay-actions { display: flex; gap: 10px; justify-content: center; margin-top: 14px; }
-.btn-primary { background: var(--primary-gradient); color: #fff; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+.form-overlay-card h3 { margin: 4px 0 12px 0; color: #fff; font-size: 1.3rem; font-weight: 800; }
+.form-overlay-card p { color: #d6d6d6; margin: 0 0 8px 0; }
+
+/* The "Urgent?" line - visually separated and left aligned */
+.overlay-urgent {
+  font-size: 1rem;
+  color: #f2f2f2;
+  margin: 0 0 16px 0; /* 16px gap below as requested */
+  font-weight: 600;
+}
+
+/* Actions: primary CTA should be full width on small screens and placed under the urgent copy */
+.overlay-actions { display: flex; gap: 10px; justify-content: flex-start; margin-top: 0; }
+.btn-primary { background: var(--primary-gradient); color: #fff; border: none; padding: 12px 18px; border-radius: 10px; cursor: pointer; font-weight: 700; }
 .btn-ghost { background: transparent; color: #cfcfcf; border: 1px solid rgba(255,255,255,0.04); padding: 10px 12px; border-radius: 8px; cursor: pointer; }
+
+@media (max-width: 460px) {
+  .form-overlay-card { padding: 18px; }
+  .btn-primary { width: 100%; display: block; text-align: center; }
+}
 
 /* Resume download (outlined) - higher specificity to avoid accidental overrides */
 #resume .resume-download,
