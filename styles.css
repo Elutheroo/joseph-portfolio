@@ -76,7 +76,7 @@ section {
   z-index: 1000;
 }
 
-.header-bar { padding: 8px var(--surface-horizontal-padding); }
+.header-bar { padding: 8px var(--surface-horizontal-padding, 16px); }
 
 /* Override surface horizontal padding to 16px for header inner spacing */
 :root { --surface-horizontal-padding: 16px; }
