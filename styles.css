@@ -308,12 +308,13 @@ form button {
 @media (max-width: 600px) {
   .resume-download {
     display: block;
-    width: calc(100% + (var(--content-padding) * 2));
-    margin-left: calc(var(--content-padding) * -1);
-    margin-right: calc(var(--content-padding) * -1);
-    max-width: 100vw;
+    /* respect page gutters: fill available content width but keep horizontal padding */
+    width: calc(100% - (var(--content-padding) * 2));
+    max-width: 100%;
+    margin: 0 auto;
     padding: 14px 18px;
     border-radius: 8px;
+    box-sizing: border-box;
   }
 }
 
