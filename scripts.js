@@ -65,3 +65,47 @@ window.addEventListener('scroll', () => {
     }
   }
 });
+
+// Ensure testimonial cards share equal dimensions (match tallest)
+function equalizeTestimonialSizes() {
+  const items = Array.from(document.querySelectorAll('.testimonial-item'));
+  if (!items.length) return;
+
+  // reset heights
+  items.forEach(it => {
+    it.style.height = 'auto';
+  });
+
+  // compute max height
+  const maxHeight = items.reduce((max, el) => Math.max(max, el.getBoundingClientRect().height), 0);
+
+  // apply height to all
+  items.forEach(it => {
+    it.style.height = Math.ceil(maxHeight) + 'px';
+  });
+}
+
+// debounce helper
+function debounce(fn, wait = 120) {
+  let t;
+  return function(...args) {
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(this, args), wait);
+  };
+}
+
+// Run after DOM load and on resize
+window.addEventListener('load', () => {
+  equalizeTestimonialSizes();
+  // also run again after a short delay in case webfonts/images change layout
+  setTimeout(equalizeTestimonialSizes, 250);
+});
+
+window.addEventListener('resize', debounce(() => {
+  equalizeTestimonialSizes();
+}, 120));
+
+// Also re-run when fonts finish loading
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(equalizeTestimonialSizes);
+}
