@@ -336,7 +336,7 @@ form button {
 
 /* Ensure the primary heading has space on the right so the close icon doesn't overlap. */
 .form-overlay-card h3 {
-  padding-right: 56px; /* reserve space for close icon + 16px gap */
+  padding-right: 16px; /* ensure 16px gap between close icon and primary message */
 }
 
 /* Align leading icon inside primary buttons */
