@@ -99,12 +99,15 @@ exports.handler = async (event, context) => {
     });
 
     if (res.ok) return json(200, { ok: true });
-    const text = await res.text().catch(() => 'unknown error');
-    console.error('Brevo error', res.status, text);
-    return json(500, { error: 'Failed to send email' });
+    // Try to extract response body for debugging (avoid leaking secrets)
+    let bodyText = await res.text().catch(() => 'unknown error');
+    let parsedBody = null;
+    try { parsedBody = JSON.parse(bodyText); } catch (e) { /* not JSON */ }
+    console.error('Brevo error', res.status, parsedBody || bodyText);
+    return json(500, { error: 'Failed to send email', providerStatus: res.status, providerBody: parsedBody || bodyText });
   } catch (err) {
     console.error('Brevo request failed', err);
-    return json(500, { error: 'Failed to send email' });
+    return json(500, { error: 'Failed to send email', detail: String(err && err.message ? err.message : err) });
   }
 };
 
