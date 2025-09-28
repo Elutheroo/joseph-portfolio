@@ -382,6 +382,35 @@ footer {
   }
 }
 
+/* Page-level gutters on tablet and desktop so all content aligns */
+@media (min-width: 600px) {
+  body {
+    padding-left: var(--content-padding);
+    padding-right: var(--content-padding);
+  }
+
+  /* Ensure footer text aligns with page content */
+  footer p {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 24px 0; /* vertical spacing inside footer */
+  }
+
+  /* Guarantee any direct children that span full width align to the content width */
+  header .header-bar,
+  section,
+  #services,
+  #projects,
+  #about,
+  #testimonials,
+  #contact,
+  #resume {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
 .service-card {
   background: #1c1c1c;
   padding: 20px;
