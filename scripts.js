@@ -303,7 +303,19 @@ window.addEventListener('load', () => {
     e.preventDefault();
 
     const submitBtn = form.querySelector('[type="submit"]');
-    if (submitBtn) submitBtn.disabled = true;
+    let loadingInterval = null;
+    let origText = null;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      // start loading text animation
+      origText = submitBtn.textContent;
+      let dots = 0;
+      submitBtn.textContent = 'Sending';
+      loadingInterval = setInterval(() => {
+        dots = (dots + 1) % 4; // 0..3
+        submitBtn.textContent = 'Sending' + '.'.repeat(dots);
+      }, 350);
+    }
 
     const formData = new FormData(form);
     const name = (formData.get('name') || '').toString().trim();
@@ -313,7 +325,11 @@ window.addEventListener('load', () => {
 
     // simple validation (HTML required already enforces, but double-check)
     if (!name || !email || !subject || !message) {
-      if (submitBtn) submitBtn.disabled = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = origText || 'Send';
+        if (loadingInterval) clearInterval(loadingInterval);
+      }
       // focus first empty
       if (!name) form.querySelector('[name="name"]').focus();
       else if (!email) form.querySelector('[name="email"]').focus();
@@ -366,8 +382,16 @@ window.addEventListener('load', () => {
         alert('Could not send message. Please try again later.');
         console.error('Form submission failed', emailRes && emailRes.error);
       }
+
+      // stop loading animation and reset button
+      if (submitBtn) {
+        if (loadingInterval) clearInterval(loadingInterval);
+        submitBtn.disabled = false;
+        submitBtn.textContent = origText || 'Send';
+      }
     }).finally(() => {
-      if (submitBtn) submitBtn.disabled = false;
+      // ensure interval cleared in any case
+      if (loadingInterval) { clearInterval(loadingInterval); }
     });
   });
 
