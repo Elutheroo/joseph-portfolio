@@ -322,3 +322,49 @@ window.addEventListener('load', () => {
     } catch (e) { /* ignore */ }
   });
 })();
+
+// Send a visit ping for presentation/case-study pages (organic-only heuristic)
+(function sendVisitPing(){
+  try {
+    if (!document.querySelector('.case-study')) return; // only on case study pages
+
+    // Simple organic detection: reject if URL has utm_ params or query campaign params
+    const search = window.location.search || '';
+    if (/utm_|utm-/.test(search)) return;
+
+    const ref = document.referrer || '';
+    // ignore referrals from same origin (internal navigation)
+    if (ref && new URL(ref).origin === window.location.origin) return;
+
+    // basic bot detection
+    const ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|bingpreview/i.test(ua)) return;
+
+    // Collect case study identifier (prefer meta or title; fallback to pathname)
+    const caseStudyTitle = document.querySelector('.slide-title')?.textContent?.trim() || document.title || window.location.pathname;
+    const page = window.location.pathname + (window.location.hash || '');
+
+    // visitor-local count: track how many times this browser viewed this case study
+    const key = 'views_' + (caseStudyTitle || page).replace(/\s+/g, '_').toLowerCase();
+    let c = parseInt(localStorage.getItem(key) || '0', 10) || 0;
+    c += 1;
+    localStorage.setItem(key, String(c));
+
+    // payload
+    const payload = {
+      caseStudy: caseStudyTitle,
+      page,
+      referrer: ref,
+      userAgent: ua,
+      visitorCount: c,
+      // include IP as empty; server will derive from request headers
+    };
+
+    // send asynchronously; no need to await
+    fetch('/.netlify/functions/track-visit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).catch(err => { /* fail silently */ console.warn('visit ping failed', err); });
+  } catch (e) { /* ignore */ }
+})();
