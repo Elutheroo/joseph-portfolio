@@ -295,6 +295,7 @@ window.addEventListener('load', () => {
   const form = document.getElementById('contactForm');
   const overlay = document.getElementById('formOverlay');
   const overlayClose = document.getElementById('overlayClose');
+  const overlayCloseIcon = document.getElementById('overlayCloseIcon');
   const overlayCall = document.getElementById('overlayCall');
   if (!form) return;
 
