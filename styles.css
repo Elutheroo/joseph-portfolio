@@ -272,7 +272,6 @@ form button {
 
 .form-overlay-card h3 { margin: 0 0 8px 0; color: #fff; font-size: 1.25rem; }
 .form-overlay-card p { color: #d6d6d6; margin: 8px 0; }
-.form-overlay-card .overlay-phone a { color: var(--primary-color); font-weight: 700; text-decoration: none; }
 
 .overlay-actions { display: flex; gap: 10px; justify-content: center; margin-top: 14px; }
 .btn-primary { background: var(--primary-gradient); color: #fff; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
