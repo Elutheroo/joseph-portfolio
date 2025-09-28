@@ -308,13 +308,13 @@ form button {
 .form-overlay-card {
   position: relative;
   background: rgba(13,13,13,0.96);
-  padding: 22px 22px 18px 22px;
+  padding: 28px 22px 20px 22px; /* extra top padding so close icon doesn't overlap heading */
   border-radius: 14px;
   max-width: 520px;
   width: calc(100% - 48px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.04);
-  text-align: left;
+  text-align: center; /* center primary message */
 }
 
 /* Close icon in top-right */
