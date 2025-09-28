@@ -125,3 +125,10 @@ window.addEventListener('resize', debounce(() => {
 if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(equalizeTestimonialSizes);
 }
+
+// Set dynamic year in footer
+(function setFooterYear(){
+  const y = new Date().getFullYear();
+  const el = document.getElementById('year');
+  if (el) el.textContent = y;
+})();
