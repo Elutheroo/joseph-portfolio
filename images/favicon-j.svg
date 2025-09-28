@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="J logo">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#158C62" />
+      <stop offset="100%" stop-color="#1cbf85" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" ry="96" fill="url(#g)" />
+  <text x="50%" y="52%" text-anchor="middle" fill="#fff" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="260">J</text>
+</svg>
