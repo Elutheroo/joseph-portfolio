@@ -263,6 +263,7 @@ form button {
 /* Footer (surface, non-fixed so it sits at page bottom in normal flow) */
 footer {
   position: relative; /* non-fixed */
+  width: calc(100% - (var(--content-padding, 24px) * 2));
   max-width: var(--content-max-width);
   margin: 48px auto 32px; /* sits near page bottom with breathing room */
   background: rgba(13,13,13,0.92);
@@ -270,10 +271,15 @@ footer {
   border-radius: 9999px; /* fully rounded to match header */
   border: 1px solid rgba(255,255,255,0.04);
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  padding: 10px 14px;
+  padding: 12px var(--surface-horizontal-padding);
   font-size: 0.9rem;
   z-index: 10;
   text-align: center;
+}
+
+/* Make footer behave like header on narrow screens */
+@media (max-width: 600px) {
+  footer { width: calc(100% - (var(--content-padding, 24px) * 2)); }
 }
 
 /* Tools list styles */
