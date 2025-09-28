@@ -25,6 +25,7 @@ ul {
 :root {
   --content-max-width: 1000px;
   --content-padding: 20px;
+  --header-height: 72px;
 }
 section {
   padding: 80px var(--content-padding);
@@ -54,8 +55,44 @@ section {
   padding: var(--content-padding);
 }
 
+@media (min-width: 600px) {
+  :root { --content-padding: 40px; }
+
+  /* Floating header on tablet and up */
+  .sticky-header {
+    position: fixed;
+    top: 24px;
+    left: var(--content-padding);
+    right: var(--content-padding);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    padding: 0; /* inner spacing handled by .header-bar */
+  }
+
+  /* Slightly reduce inner padding so header height stays compact */
+  .header-bar { padding: calc(var(--content-padding) - 6px); }
+
+  /* Ensure page content clears the floating header */
+  body { padding-top: calc(var(--header-height) + 24px); }
+}
+
 @media (min-width: 1200px) {
-  :root { --content-max-width: 1200px; }
+  :root { --content-max-width: 1200px; --content-padding: 80px; --header-height: 84px; }
+
+  /* Slightly larger floating header on large screens */
+  .sticky-header {
+    top: 32px;
+    border-radius: 16px;
+  }
+
+  .header-bar { padding: calc(var(--content-padding) - 10px); }
+
+  body { padding-top: calc(var(--header-height) + 28px); }
 }
 .sticky-header .logo {
   font-size: 1.4rem;
