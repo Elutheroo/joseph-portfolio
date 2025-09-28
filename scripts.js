@@ -460,6 +460,46 @@ window.addEventListener('load', () => {
   });
 })();
 
+// General visit ping (notify on visits + geo) — limited and organic-only
+(function sendGeneralVisitPing(){
+  try {
+    // Avoid sending duplicate pings for same path within 6 hours
+    const path = window.location.pathname;
+    const lastKey = 'visit_ping_' + path;
+    const last = parseInt(sessionStorage.getItem(lastKey) || '0', 10) || 0;
+    const now = Date.now();
+    const SIX_HOURS = 1000 * 60 * 60 * 6;
+    if (now - last < SIX_HOURS) return; // recently pinged
+
+    // Ignore obvious campaign / utm traffic
+    const search = window.location.search || '';
+    if (/utm_|utm-/.test(search)) return;
+
+    // Basic bot UA filter
+    const ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|bingpreview/i.test(ua)) return;
+
+    const ref = document.referrer || '';
+
+    const payload = {
+      page: window.location.pathname + (window.location.hash || ''),
+      referrer: ref,
+      userAgent: ua,
+      visitorCount: 1,
+    };
+
+    fetch('/.netlify/functions/track-visit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).then(() => {
+      sessionStorage.setItem(lastKey, String(Date.now()));
+    }).catch(err => {
+      console.warn('general visit ping failed', err);
+    });
+  } catch (e) { /* ignore */ }
+})();
+
 // Send a visit ping for presentation/case-study pages (organic-only heuristic)
 (function sendVisitPing(){
   try {
