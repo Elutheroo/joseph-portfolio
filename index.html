@@ -243,6 +243,19 @@
 
   <button id="backToTop" aria-label="Back to top"></button>
 
+  <!-- Hidden Netlify form to trigger visit notifications -->
+  <form name="visit-notify" data-netlify="true" netlify style="display:none;">
+    <input type="hidden" name="form-name" value="visit-notify" />
+    <input type="hidden" name="page" />
+    <input type="hidden" name="caseStudy" />
+    <input type="hidden" name="referrer" />
+    <input type="hidden" name="ip" />
+    <input type="hidden" name="city" />
+    <input type="hidden" name="region" />
+    <input type="hidden" name="country" />
+    <input type="hidden" name="userAgent" />
+  </form>
+
   <script src="scripts.js"></script>
 </body>
 
