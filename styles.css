@@ -195,13 +195,18 @@ form button {
 }
 
 /* Resume */
+#resume {
+  text-align: center; /* center contents horizontally */
+}
+
 .resume-download {
   display: inline-block;
   padding: 12px 20px;
   background: linear-gradient(90deg, #158C62, #1cbf85);
   color: white;
-  border-radius: 6px;
+  border-radius: 12px; /* slightly more rounded to match header style */
   text-align: center;
+  margin: 0 auto; /* ensure centered when treated as block-level */
 }
 
 /* Footer */
