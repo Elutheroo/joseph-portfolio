@@ -1106,6 +1106,7 @@ body { padding-top: calc(var(--header-height) + 24px); }
   display: flex;
   gap: 2rem; /* space between cards */
   overflow-x: auto; /* enables horizontal scroll */
+  overflow-y: visible; /* allow lifted cards to be visible above the row */
   scroll-snap-type: x mandatory; /* smooth snap scroll */
   padding-bottom: 1rem;
 }
@@ -1119,7 +1120,10 @@ body { padding-top: calc(var(--header-height) + 24px); }
   color: inherit;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   scroll-snap-align: start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.28s cubic-bezier(.2,.9,.3,1), box-shadow 0.28s cubic-bezier(.2,.9,.3,1);
+  position: relative; /* establish stacking context */
+  z-index: 0;
+  will-change: transform;
 }
 
 .project-card img {
@@ -1153,6 +1157,7 @@ body { padding-top: calc(var(--header-height) + 24px); }
   display: flex;
   gap: 2rem; /* space between cards */
   overflow-x: auto; /* enables horizontal scroll */
+  overflow-y: visible; /* allow lifted cards to be visible above the row */
   scroll-snap-type: x mandatory; /* smooth snap scroll */
   padding-bottom: 1rem;
 }
@@ -1166,7 +1171,10 @@ body { padding-top: calc(var(--header-height) + 24px); }
   color: inherit;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   scroll-snap-align: start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.28s cubic-bezier(.2,.9,.3,1), box-shadow 0.28s cubic-bezier(.2,.9,.3,1);
+  position: relative; /* establish stacking context */
+  z-index: 0;
+  will-change: transform;
 }
 
 .project-card img {
