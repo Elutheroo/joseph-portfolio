@@ -506,7 +506,7 @@ body { padding-top: calc(var(--header-height) + 24px); }
 #backToTop {
   position: fixed; /* float in viewport */
   bottom: 30px;
-  right: 30px;
+  right: 24px; /* 24px inset as requested */
   background: linear-gradient(90deg, #158C62, #1cbf85);
   color: #ffffff;
   border: none;
@@ -524,6 +524,13 @@ body { padding-top: calc(var(--header-height) + 24px); }
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  #backToTop {
+    bottom: calc(var(--footer-height, 64px) + 16px);
+    right: 24px; /* keep consistent inset on mobile */
+  }
 }
 
 #backToTop.visible {
