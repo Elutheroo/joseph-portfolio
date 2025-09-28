@@ -1,5 +1,4 @@
-const nodemailer = require('nodemailer');
-
+// Netlify Function: send email via Brevo (Sendinblue) API
 exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
@@ -17,59 +16,60 @@ exports.handler = async (event, context) => {
     return { statusCode: 422, body: 'Missing required fields' };
   }
 
-  // Read SMTP credentials and destination from environment variables
-  const SMTP_HOST = process.env.SMTP_HOST;
-  const SMTP_PORT = process.env.SMTP_PORT || 587;
-  const SMTP_USER = process.env.SMTP_USER;
-  const SMTP_PASS = process.env.SMTP_PASS;
-  const FROM_EMAIL = process.env.FROM_EMAIL || SMTP_USER;
+  const BREVO_API_KEY = process.env.BREVO_API_KEY;
+  const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@example.com';
+  const FROM_NAME = process.env.FROM_NAME || 'Portfolio Contact';
   const TO_EMAIL = process.env.TO_EMAIL || 'olapagbojoseph@gmail.com';
 
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    console.error('SMTP credentials not configured');
-    return { statusCode: 500, body: 'SMTP not configured on server. Please set SMTP_HOST/SMTP_USER/SMTP_PASS.' };
+  if (!BREVO_API_KEY) {
+    console.error('BREVO_API_KEY not configured');
+    return { statusCode: 500, body: 'BREVO_API_KEY is not configured on the server.' };
   }
 
-  // Create transporter
-  let transporter;
-  try {
-    transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: parseInt(SMTP_PORT, 10),
-      secure: SMTP_PORT == 465, // true for 465, false for other ports
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS,
-      },
-    });
-  } catch (err) {
-    console.error('Failed to create transporter', err);
-    return { statusCode: 500, body: 'Failed to create email transporter' };
-  }
+  const apiUrl = 'https://api.brevo.com/v3/smtp/email';
 
-  const mailOptions = {
-    from: FROM_EMAIL,
-    to: TO_EMAIL,
+  const htmlContent = `<p><strong>Name:</strong> ${escapeHtml(name)}</p>
+  <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+  <p><strong>Message:</strong></p>
+  <p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>`;
+
+  const textContent = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+
+  const body = {
+    sender: { name: FROM_NAME, email: FROM_EMAIL },
+    to: [{ email: TO_EMAIL }],
     subject: `[Portfolio Contact] ${subject}`,
-    text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    html: `<p><strong>Name:</strong> ${escapeHtml(name)}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Message:</strong></p><p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>`,
+    htmlContent,
+    textContent,
+    replyTo: { email },
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ ok: true }),
-    };
+    const res = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': BREVO_API_KEY,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (res.ok) {
+      return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+    }
+
+    const text = await res.text();
+    console.error('Brevo API error:', res.status, text);
+    return { statusCode: 500, body: 'Failed to send email via Brevo' };
   } catch (err) {
-    console.error('Error sending email', err);
-    return { statusCode: 500, body: 'Failed to send email' };
+    console.error('Error calling Brevo API', err);
+    return { statusCode: 500, body: 'Error sending email' };
   }
 };
 
 function escapeHtml(str) {
   if (!str) return '';
-  return str
+  return String(str)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
