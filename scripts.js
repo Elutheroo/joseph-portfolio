@@ -36,25 +36,32 @@ animatedSections.forEach(section => {
 // Toggle mobile menu
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
+let navOpenScrollY = null;
 
-hamburger.addEventListener('click', (e) => {
-  e.stopPropagation(); // prevent click bubbling
-  navMenu.classList.toggle('active');
+hamburger.addEventListener('click', e => {
+  e.stopPropagation();
+  const isActive = navMenu.classList.toggle('active');
   hamburger.classList.toggle('active');
+  navOpenScrollY = isActive ? window.scrollY : null;
 });
 
 // Close menu if user clicks outside
-document.addEventListener('click', (e) => {
+document.addEventListener('click', e => {
   const isClickInside = hamburger.contains(e.target) || navMenu.contains(e.target);
   if (!isClickInside) {
     navMenu.classList.remove('active');
     hamburger.classList.remove('active');
+    navOpenScrollY = null;
   }
 });
-// Close menu on scroll (for mobile)
+
+// Close menu after meaningful scroll movement (for mobile)
 window.addEventListener('scroll', () => {
-  if (navMenu.classList.contains('active')) {
-    navMenu.classList.remove('active');
-    hamburger.classList.remove('active');
+  if (navMenu.classList.contains('active') && navOpenScrollY !== null) {
+    if (Math.abs(window.scrollY - navOpenScrollY) > 60) {
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+      navOpenScrollY = null;
+    }
   }
 });
