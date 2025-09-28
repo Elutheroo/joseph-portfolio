@@ -30,6 +30,38 @@ backToTopBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+// Smooth scroll for internal anchor links, accounting for sticky header height
+(function enableSmoothAnchors(){
+  const header = () => document.querySelector('.sticky-header');
+  function getHeaderOffset() {
+    const h = header();
+    return h ? Math.ceil(h.getBoundingClientRect().height) + 12 : 12; // small buffer
+  }
+
+  document.addEventListener('click', function(e){
+    const el = e.target.closest('a[href^="#"]');
+    if (!el) return;
+    const href = el.getAttribute('href');
+    if (!href || href === '#') return;
+    const targetId = href.slice(1);
+    const target = document.getElementById(targetId);
+    if (!target) return; // let default if not found
+
+    e.preventDefault();
+    const offset = getHeaderOffset();
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+
+    // close mobile nav if open
+    const navMenu = document.getElementById('navMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (navMenu && navMenu.classList.contains('active')) {
+      navMenu.classList.remove('active');
+      hamburger && hamburger.classList.remove('active');
+    }
+  }, { passive: true });
+})();
+
 // Scroll reveal animation
 const animatedSections = document.querySelectorAll('section');
 
