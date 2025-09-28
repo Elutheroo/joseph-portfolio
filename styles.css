@@ -348,7 +348,8 @@ form button {
 
 @media (max-width: 460px) {
   .form-overlay-card { padding: 18px; }
-  .btn-primary { width: 100%; display: block; text-align: center; }
+  /* Only make overlay primary button full-width on small screens */
+  .form-overlay .btn-primary { width: 100%; display: block; text-align: center; }
 }
 
 /* Resume download (outlined) - higher specificity to avoid accidental overrides */
