@@ -835,8 +835,9 @@ body { padding-top: calc(var(--header-height) + 24px); }
 }
 .project-card img {
   width: 100%;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 10px;
+  object-fit: cover;
 }
 .project-card h3 {
   font-size: 1.1rem;
@@ -1038,12 +1039,12 @@ body { padding-top: calc(var(--header-height) + 24px); }
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem; /* space between cards */
+  gap: 2rem;
   margin-top: 2rem;
 }
 
 .project-card {
-  background-color: #111; /* dark theme match */
+  background-color: #111;
   border-radius: 8px;
   overflow: hidden;
   text-decoration: none;
@@ -1138,34 +1139,6 @@ body { padding-top: calc(var(--header-height) + 24px); }
   color: inherit;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   scroll-snap-align: start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.project-card h3 {
-  margin: 1rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-.projects-grid {
-  display: flex;
-  flex-direction: column; /* stack vertically */
-  gap: 2rem; /* space between cards */
-}
-
-.project-card {
-  width: 100%; /* take full width of container */
-  background-color: #111;
-  border-radius: 8px;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1379,3 +1352,128 @@ body { padding-top: calc(var(--header-height) + 24px); }
   :root { --project-gutter: 1rem; }
   .projects-grid .project-card { padding: var(--project-gutter); }
 }
+
+/* ===========================
+   PRESENTATION-STYLE CASE STUDY ENHANCEMENTS
+   =========================== */
+
+/* Slide-like full-width section container for presentation flow */
+.case-slide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 6rem var(--content-padding);
+  margin: 0 auto 2rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.0));
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.02);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+}
+
+/* Larger, dramatic headings for slide titles */
+.case-slide .slide-title {
+  font-size: clamp(1.6rem, 3.6vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.case-slide .slide-subtitle {
+  color: #cfcfcf;
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+}
+
+/* Split layout for process steps with step number */
+.process-split {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.process-step-number {
+  background: rgba(21,140,98,0.12);
+  color: var(--primary-color);
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 14px;
+  min-width: 88px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+.process-step-content h3 { margin: 0 0 8px 0; }
+
+/* Visual showcase: full-bleed image inside presentation card */
+.showcase {
+  display: block;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.showcase img { width: 100%; height: auto; display: block; }
+
+/* Alternating background rows to guide narrative */
+.case-slide.alt { background: rgba(21,140,98,0.02); }
+.case-slide.alt .slide-title { color: #eafaf0; }
+
+/* Tiny nav for quick jumping between major sections (presentation feel) */
+.slide-nav {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 1rem 0 2rem;
+}
+.slide-nav button {
+  width: 10px; height: 10px; border-radius: 50%; border: none; background: rgba(255,255,255,0.12); cursor: pointer;
+}
+.slide-nav button.active { background: var(--primary-color); box-shadow: 0 6px 18px rgba(21,140,98,0.14); }
+
+/* Callout box for impact / metrics */
+.case-callout {
+  background: linear-gradient(90deg, rgba(21,140,98,0.06), rgba(0,0,0,0.02));
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid rgba(21,140,98,0.06);
+}
+.case-callout h3 { color: var(--primary-color); margin: 0 0 0.5rem 0; }
+
+/* Presentation CTA */
+.case-cta {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  background: var(--primary-gradient);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  font-weight: 700;
+}
+
+/* Sub-grid for HIFI visual storytelling */
+.hifi-showcase {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.hifi-showcase .large { grid-column: 1 / -1; }
+
+@media (min-width: 900px) {
+  .case-slide { grid-template-columns: 1fr 420px; }
+  .process-split { grid-template-columns: 80px 1fr; }
+  .hifi-showcase { grid-template-columns: 2fr 1fr; }
+  .hifi-showcase .large { grid-column: 1 / 2; }
+}
+
+/* Accessibility: ensure focus states for slide-nav */
+.slide-nav button:focus { outline: 3px solid rgba(21,140,98,0.18); }
+
+/* Keep original breakpoints and behavior for smaller screens */
+@media (max-width: 768px) {
+  .case-slide { padding: 2.5rem 1rem; grid-template-columns: 1fr; }
+  .process-split { grid-template-columns: 1fr; }
+  .process-step-number { display: inline-block; margin-bottom: 12px; }
+  .hifi-showcase { grid-template-columns: 1fr; }
+}
+
+/* End of presentation-style enhancements */
