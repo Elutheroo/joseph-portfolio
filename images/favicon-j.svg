@@ -8,6 +8,10 @@
   </defs>
   <!-- circular background -->
   <circle cx="256" cy="256" r="256" fill="url(#g)" />
-  <!-- Centered letter J using Verdana, vertically centered -->
-  <text x="50%" y="50%" text-anchor="middle" fill="#ffffff" font-family="Verdana, Arial, sans-serif" font-weight="700" font-size="260" dominant-baseline="central">J</text>
+
+  <!-- Dominant, trimmed and slightly flattened J centered visually -->
+  <!-- We translate to center and apply a slight vertical scale to "flatten" the glyph -->
+  <g transform="translate(256 262) scale(1 0.86)">
+    <text x="0" y="0" text-anchor="middle" fill="#ffffff" font-family="Verdana, Arial, sans-serif" font-weight="900" font-size="320" dominant-baseline="middle">J</text>
+  </g>
 </svg>
