@@ -24,84 +24,101 @@
 </header>
 
 <main class="case-study">
-  <section class="case-study">
+  <nav class="slide-nav" aria-label="Case study navigation">
+    <button class="active" aria-label="Hero slide"></button>
+    <button aria-label="Overview slide"></button>
+    <button aria-label="Process slide"></button>
+    <button aria-label="Designs slide"></button>
+    <button aria-label="Impact slide"></button>
+  </nav>
 
-  <!-- Hero Section -->
-  <div class="cs-hero">
-    <div class="cs-hero-text">
-      <h1>Olabisi Onabanjo University Portal Redesign</h1>
-      <p>Transforming an outdated university portal into a modern, intuitive experience for students, staff, and cyber café operators.</p>
+  <!-- Slide 1: Hero -->
+  <section class="case-slide">
+    <div>
+      <h1 class="slide-title">Olabisi Onabanjo University Portal Redesign</h1>
+      <p class="slide-subtitle">Transforming an outdated university portal into a modern, intuitive experience for students, staff, and cyber café operators.</p>
+      <div style="height:18px"></div>
+      <div class="case-callout" aria-hidden>
+        <h3>Project Snapshot</h3>
+        <p><strong>Duration:</strong> 1 Month • <strong>Role:</strong> UX/UI Designer</p>
+      </div>
+      <div style="height:18px"></div>
+      <a class="case-cta" href="#cs-overview">View Story</a>
     </div>
-    <div class="cs-hero-img">
+
+    <aside class="showcase" aria-hidden>
       <img src="images/oou-portal-cover.jpg" alt="OOU Portal Redesign Cover" loading="eager" decoding="async">
-    </div>
-  </div>
-
-  <!-- Overview -->
-  <section class="cs-overview">
-    <h2>Project Overview</h2>
-    <p><strong>Duration:</strong> 1 Month</p>
-    <p><strong>Role:</strong> UX/UI Designer</p>
-    <p><strong>The Problem:</strong> The portal was difficult to navigate, with an outdated and cluttered layout that frustrated users.</p>
-    <p><strong>The Goal:</strong> Create a modern, intuitive interface improving usability for students, staff, and cyber café operators.</p>
+    </aside>
   </section>
 
-  <!-- Process -->
-  <section class="cs-process">
-    <h2>Process</h2>
-    <ol>
-      <li><strong>Evaluated Existing Portal</strong> – Reviewed the current design visually and functionally.</li>
-      <li><strong>Mapped User Flows</strong> – Created a quick mental journey map to identify navigation friction points.</li>
-      <li><strong>Paper Wireframes</strong> – Sketched layout improvements in a notebook.</li>
-      <li><strong>Digital Wireframes</strong> – Developed wireframes in Figma for structure and clarity.</li>
-      <li><strong>UI Design</strong> – Applied visual hierarchy, improved icons, and designed a dark mode option.</li>
-    </ol>
-  </section>
-
-  <!-- Wireframes -->
-  <section class="cs-wireframes">
-    <h2>Wireframes</h2>
-    <h3>Paper Wireframes</h3>
-    <div class="wireframe-row">
-      <img src="images/oou-paper1.jpg" alt="Paper Wireframe 1" loading="lazy" decoding="async">
-      <img src="images/oou-paper2.jpg" alt="Paper Wireframe 2" loading="lazy" decoding="async">
-    </div>
-    <h3>Digital Wireframes</h3>
-    <div class="wireframe-row">
-      <img src="images/oou-digital1.jpg" alt="Digital Wireframe 1" loading="lazy" decoding="async">
-      <img src="images/oou-digital2.jpg" alt="Digital Wireframe 2" loading="lazy" decoding="async">
+  <!-- Slide 2: Overview -->
+  <section id="cs-overview" class="case-slide alt">
+    <div class="slide-title">Project Overview</div>
+    <div>
+      <p><strong>The Problem:</strong> The portal was difficult to navigate, with an outdated and cluttered layout that frustrated users.</p>
+      <p><strong>The Goal:</strong> Create a modern, intuitive interface improving usability for students, staff, and cyber café operators.</p>
     </div>
   </section>
 
-  <!-- High-Fidelity Designs -->
-  <section class="cs-hifi">
-    <h2>High-Fidelity Designs</h2>
-    <div class="hifi-grid">
-      <img src="images/oou-hifi1.jpg" alt="High Fidelity Screen 1" loading="lazy" decoding="async">
-      <img src="images/oou-hifi2.jpg" alt="High Fidelity Screen 2" loading="lazy" decoding="async">
-      <img src="images/oou-hifi3.jpg" alt="High Fidelity Screen 3" loading="lazy" decoding="async">
+  <!-- Slide 3: Process -->
+  <section class="case-slide">
+    <div class="process-split">
+      <div class="process-step-number">01</div>
+      <div class="process-step-content">
+        <h3>Evaluated Existing Portal</h3>
+        <p>Reviewed the current design visually and functionally to find quick wins and problem areas.</p>
+      </div>
+
+      <div class="process-step-number">02</div>
+      <div class="process-step-content">
+        <h3>Mapped User Flows</h3>
+        <p>Created journey maps to identify navigation friction for students, staff, and cyber café users.</p>
+      </div>
+
+      <div class="process-step-number">03</div>
+      <div class="process-step-content">
+        <h3>Wireframes & UI</h3>
+        <p>Sketched paper wireframes, iterated in digital wireframes, and produced high-fidelity screens with a clear visual hierarchy.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Accessibility -->
-  <section class="cs-accessibility">
-    <h2>Accessibility & Usability Improvements</h2>
-    <ul>
-      <li>Simplified navigation with logical menu grouping</li>
-      <li>Clear visual hierarchy for faster scanning</li>
-      <li>Effective icon usage to improve recognition</li>
-      <li>Dark mode for contrast and visual comfort</li>
-    </ul>
+  <!-- Slide 4: Designs -->
+  <section class="case-slide alt">
+    <div class="hifi-showcase">
+      <div class="large showcase"><img src="images/oou-hifi1.jpg" alt="High Fidelity Screen 1" loading="lazy" decoding="async"></div>
+      <div><img src="images/oou-hifi2.jpg" alt="High Fidelity Screen 2" loading="lazy" decoding="async"></div>
+      <div><img src="images/oou-hifi3.jpg" alt="High Fidelity Screen 3" loading="lazy" decoding="async"></div>
+    </div>
+
+    <div>
+      <h3>Wireframes</h3>
+      <div class="wireframe-row">
+        <img src="images/oou-paper1.jpg" alt="Paper Wireframe 1" loading="lazy" decoding="async">
+        <img src="images/oou-paper2.jpg" alt="Paper Wireframe 2" loading="lazy" decoding="async">
+      </div>
+      <div class="wireframe-row">
+        <img src="images/oou-digital1.jpg" alt="Digital Wireframe 1" loading="lazy" decoding="async">
+        <img src="images/oou-digital2.jpg" alt="Digital Wireframe 2" loading="lazy" decoding="async">
+      </div>
+    </div>
   </section>
 
-  <!-- Impact -->
-  <section class="cs-impact">
-    <h2>Impact & Learnings</h2>
-    <p>The redesign makes the portal cleaner, faster to navigate, and more inclusive for all user types.</p>
-    <p><strong>Key takeaway:</strong> Even legacy systems can be revitalized with thoughtful UX improvements and modern UI practices.</p>
-  </section>
+  <!-- Slide 5: Impact -->
+  <section class="case-slide">
+    <div>
+      <h2>Impact & Learnings</h2>
+      <p>The redesign makes the portal cleaner, faster to navigate, and more inclusive for all user types.</p>
+      <p><strong>Key takeaway:</strong> Even legacy systems can be revitalized with thoughtful UX improvements and modern UI practices.</p>
+    </div>
 
-</section>
+    <div>
+      <div class="case-callout">
+        <h3>Outcome</h3>
+        <p>Improved navigation and clearer visual hierarchy led to easier access for students and staff.</p>
+      </div>
+    </div>
+  </section>
 
 </main>
 
