@@ -347,7 +347,11 @@ form button {
 
 /* Actions: primary CTA should be full width on small screens and placed under the urgent copy */
 .overlay-actions { display: flex; gap: 10px; justify-content: flex-start; margin-top: 0; }
-.btn-primary { background: var(--primary-gradient); color: #fff; border: none; padding: 12px 18px; border-radius: 10px; cursor: pointer; font-weight: 700; }
+.btn-primary { background: var(--primary-gradient); color: #fff; border: none; padding: 12px 18px; border-radius: 10px; cursor: pointer; font-weight: 700; display: inline-flex; align-items: center; }
+
+/* Leading icon in primary buttons */
+.btn-primary .icon-leading { margin-right: 12px; width: 20px; height: 20px; display: inline-block; }
+.btn-primary .icon-leading path { color: inherit; }
 .btn-ghost { background: transparent; color: #cfcfcf; border: 1px solid rgba(255,255,255,0.04); padding: 10px 12px; border-radius: 8px; cursor: pointer; }
 
 @media (max-width: 460px) {
