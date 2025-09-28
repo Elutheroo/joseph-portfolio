@@ -283,11 +283,29 @@ form button {
   justify-content: center;
   gap: 10px;
   padding: 12px 20px;
-  background: var(--primary-gradient);
-  color: white;
-  border-radius: 12px; /* slightly more rounded to match header style */
+  background: transparent; /* outlined style */
+  color: var(--primary-color);
+  border-radius: 12px;
+  border: 2px solid var(--primary-color);
   text-align: center;
-  margin: 0 auto; /* ensure centered when treated as block-level */
+  margin: 0 auto;
+  font-weight: 700;
+}
+
+/* ensure icon inherits button color */
+.resume-download svg path { stroke: currentColor; }
+
+/* Mobile: make resume button span full viewport width */
+@media (max-width: 600px) {
+  .resume-download {
+    display: block;
+    width: calc(100% + (var(--content-padding) * 2));
+    margin-left: calc(var(--content-padding) * -1);
+    margin-right: calc(var(--content-padding) * -1);
+    max-width: 100vw;
+    padding: 14px 18px;
+    border-radius: 8px;
+  }
 }
 
 /* Footer (surface, non-fixed so it sits at page bottom in normal flow) */
