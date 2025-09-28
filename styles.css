@@ -240,21 +240,16 @@ body { padding-top: calc(var(--header-height) + 24px); padding-bottom: calc(var(
   footer { bottom: 32px; }
 }
 
-/* Back to Top */
+/* Back to Top (now placed inside footer) */
 #backToTop {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
   background: linear-gradient(90deg, #158C62, #1cbf85);
   color: #ffffff;
   border: none;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%; /* circular */
   cursor: pointer;
-  display: none; /* shown via JS when needed */
-  z-index: 999;
-  display: inline-flex;
+  display: inline-flex; /* visible state controlled via JS (display toggling) */
   align-items: center;
   justify-content: center;
   line-height: 0;
@@ -274,6 +269,23 @@ body { padding-top: calc(var(--header-height) + 24px); padding-bottom: calc(var(
   /* ensure the chevron is centered and uses crisp rendering */
   box-sizing: content-box;
   line-height: 0;
+}
+
+/* Footer bar layout to hold content and the backToTop button */
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 8px var(--surface-horizontal-padding);
+}
+
+/* Ensure the resume-like button (if present) aligns like header items */
+.footer-bar .resume-download,
+.footer-bar #backToTop {
+  margin-left: auto;
 }
 
 /* Scroll animation classes */
