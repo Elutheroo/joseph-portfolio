@@ -382,6 +382,59 @@ footer {
   display: block; /* ensure anchor behaves as block container */
 }
 
+/* Case study pages styling */
+.case-study {
+  max-width: var(--content-max-width);
+  margin: 36px auto;
+  padding: 0 var(--content-padding);
+  color: #e6e6e6;
+}
+
+.case-study .cs-hero,
+.case-study .hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.cs-hero-img img,
+.hero-img img,
+.case-study .cs-hero img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.cs-hero-text h1,
+.hero-text h1 {
+  font-size: 2rem;
+  margin: 0 0 8px 0;
+  color: #fff;
+}
+
+.case-study section {
+  margin-bottom: 26px;
+}
+
+.case-study h2 { color: #fff; margin-bottom: 12px; }
+
+.case-study .hifi-grid img,
+.case-study .gallery img,
+.case-study .wireframe-row img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 800px) {
+  .case-study .cs-hero,
+  .case-study .hero { grid-template-columns: 1fr 1fr; }
+  .case-study .hifi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+}
+
 .project-card img {
   display: block;
   width: calc(100% - (var(--project-gutter) * 2));
