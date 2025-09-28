@@ -192,28 +192,32 @@ if (document.fonts && document.fonts.ready) {
       return;
     }
 
-    // build mailto link to send via user's mail client
-    const to = 'olapagbojoseph@gmail.com';
-    const body = `From: ${name} <${email}>\n\n${message}\n\n--\nSite contact form`;
-    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    // send form data to server endpoint (requires a backend or third-party endpoint)
+    const endpoint = '/api/contact';
+    const payload = { name, email, subject, message };
 
-    // open mail client
-    try {
-      window.location.href = mailto;
-    } catch (err) {
-      window.open(mailto, '_blank');
-    }
-
-    // show custom overlay
-    if (overlay) {
-      overlay.classList.remove('hidden');
-      overlay.setAttribute('aria-hidden', 'false');
-    }
-
-    // reset form after small delay
-    setTimeout(() => {
-      form.reset();
-    }, 400);
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).then(async res => {
+      if (res.ok) {
+        // show success overlay
+        if (overlay) {
+          overlay.classList.remove('hidden');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
+        form.reset();
+      } else {
+        // server responded with error
+        const text = await res.text().catch(() => 'Server error');
+        alert('Could not send message: ' + text);
+      }
+    }).catch(err => {
+      // network or CORS error
+      console.error('Contact send failed', err);
+      alert('Could not send message from this site. Please check your server or connect a form service.');
+    });
   });
 
   // overlay interactions
