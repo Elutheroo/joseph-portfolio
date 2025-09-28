@@ -190,11 +190,16 @@
 <!-- Custom success overlay (hidden by default) -->
 <div id="formOverlay" class="form-overlay hidden" aria-hidden="true">
   <div class="form-overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+    <button id="overlayCloseIcon" class="overlay-close-icon" aria-label="Close overlay">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M6 18L18 6" stroke="#cfcfcf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
     <h3 id="overlayTitle">Successfully delivered</h3>
-    <p>Your message has been successfully delivered! Urgent? Put a call through.</p>
+
+    <p class="overlay-urgent">Urgent?</p>
+
     <div class="overlay-actions">
       <button id="overlayCall" class="btn-primary">Put a call through</button>
-      <button id="overlayClose" class="btn-ghost">Close</button>
     </div>
   </div>
 </div>
