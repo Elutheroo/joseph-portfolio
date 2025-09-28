@@ -1,34 +1,58 @@
 // Show or hide the Back to Top button: become active once user is away from above-the-fold
 const backToTopBtn = document.getElementById('backToTop');
 
-function getAboveFoldThreshold() {
+// Prefer IntersectionObserver on the hero section to avoid flicker during initial scroll
+(function setupBackToTopVisibility(){
   const home = document.getElementById('home');
-  if (home) {
-    // show once user scrolls past most of the hero/home section
-    return Math.max( Math.min(home.offsetHeight - 40, window.innerHeight * 0.9), window.innerHeight * 0.25 );
-  }
-  // fallback to half the viewport
-  return window.innerHeight * 0.5;
-}
+  if (!backToTopBtn) return;
 
-let currentThreshold = getAboveFoldThreshold();
-window.addEventListener('resize', () => {
-  currentThreshold = getAboveFoldThreshold();
-});
+  if (home && 'IntersectionObserver' in window) {
+    // observe hero visibility; when hero is not intersecting, show the button
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          backToTopBtn.classList.remove('visible');
+        } else {
+          backToTopBtn.classList.add('visible');
+        }
+      });
+    }, { root: null, threshold: 0.05 });
 
-window.addEventListener('scroll', () => {
-  const sc = window.scrollY || window.pageYOffset;
-  if (sc > currentThreshold) {
-    backToTopBtn.classList.add('visible');
+    io.observe(home);
+
+    // keep a fallback in case the observer becomes disconnected (e.g., browser tab hidden)
+    window.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        // force check
+        const rect = home.getBoundingClientRect();
+        const visible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (visible) backToTopBtn.classList.remove('visible'); else backToTopBtn.classList.add('visible');
+      }
+    });
   } else {
-    backToTopBtn.classList.remove('visible');
-  }
-});
+    // Fallback: use scroll threshold if hero not present
+    function getAboveFoldThreshold() {
+      const homeEl = document.getElementById('home');
+      if (homeEl) {
+        return Math.max( Math.min(homeEl.offsetHeight - 40, window.innerHeight * 0.9), window.innerHeight * 0.25 );
+      }
+      return window.innerHeight * 0.5;
+    }
 
-// Scroll to top smoothly when button is clicked
-backToTopBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+    let currentThreshold = getAboveFoldThreshold();
+    window.addEventListener('resize', () => { currentThreshold = getAboveFoldThreshold(); });
+
+    window.addEventListener('scroll', () => {
+      const sc = window.scrollY || window.pageYOffset;
+      if (sc > currentThreshold) backToTopBtn.classList.add('visible'); else backToTopBtn.classList.remove('visible');
+    }, { passive: true });
+  }
+
+  // Scroll to top smoothly when button is clicked
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
 
 // Smooth scroll for internal anchor links, accounting for sticky header height
 (function enableSmoothAnchors(){
