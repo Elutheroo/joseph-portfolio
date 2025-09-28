@@ -1,12 +1,24 @@
-// Show or hide the Back to Top button (appear only after user scrolls)
+// Show or hide the Back to Top button: become active once user is away from above-the-fold
 const backToTopBtn = document.getElementById('backToTop');
-let hasScrolledOnce = false;
+
+function getAboveFoldThreshold() {
+  const home = document.getElementById('home');
+  if (home) {
+    // show once user scrolls past most of the hero/home section
+    return Math.max( Math.min(home.offsetHeight - 40, window.innerHeight * 0.9), window.innerHeight * 0.25 );
+  }
+  // fallback to half the viewport
+  return window.innerHeight * 0.5;
+}
+
+let currentThreshold = getAboveFoldThreshold();
+window.addEventListener('resize', () => {
+  currentThreshold = getAboveFoldThreshold();
+});
 
 window.addEventListener('scroll', () => {
-  // mark that the user attempted to scroll at least once
-  if (!hasScrolledOnce && window.scrollY > 0) hasScrolledOnce = true;
-
-  if (hasScrolledOnce && window.scrollY > 0) {
+  const sc = window.scrollY || window.pageYOffset;
+  if (sc > currentThreshold) {
     backToTopBtn.classList.add('visible');
   } else {
     backToTopBtn.classList.remove('visible');
