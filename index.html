@@ -176,16 +176,29 @@
 
     <h2>Contact Me</h2>
 
-    <form name="contact" method="POST" data-netlify="true">
+    <form id="contactForm" name="contact" method="POST">
   <input type="hidden" name="form-name" value="contact" />
 
   <input type="text" name="name" placeholder="Name" required />
   <input type="email" name="email" placeholder="Email" required />
-  <input type="text" name="subject" placeholder="Subject" />
+  <input type="text" name="subject" placeholder="Subject" required />
   <textarea name="message" placeholder="Your message" required></textarea>
 
   <button type="submit">Send</button>
 </form>
+
+<!-- Custom success overlay (hidden by default) -->
+<div id="formOverlay" class="form-overlay hidden" aria-hidden="true">
+  <div class="form-overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+    <h3 id="overlayTitle">Successfully sent</h3>
+    <p>Your message has been queued. Urgent? Put a call through.</p>
+    <p class="overlay-phone">Call: <a href="tel:+2337014877302">+233 70 148 77302</a></p>
+    <div class="overlay-actions">
+      <button id="overlayCall" class="btn-primary">Call now</button>
+      <button id="overlayClose" class="btn-ghost">Close</button>
+    </div>
+  </div>
+</div>
 
     <div class="social-links">
 
