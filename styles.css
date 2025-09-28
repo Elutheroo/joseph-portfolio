@@ -108,10 +108,14 @@ nav a:hover {
   text-decoration: underline;
 }
 .resume-btn {
-  background: linear-gradient(90deg, #158C62, #1cbf85);
-  padding: 8px 16px;
+  background: var(--primary-gradient);
+  padding: 8px 14px;
   border-radius: 20px;
   color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 /* Hero */
