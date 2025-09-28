@@ -115,6 +115,15 @@ body { padding-top: calc(var(--header-height) + 24px); }
 .sticky-header nav ul {
   display: flex;
   gap: 20px;
+  align-items: center; /* ensure nav items vertically center inside header */
+}
+
+/* Make anchor links vertically centered as well */
+.sticky-header nav ul li a {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding: 6px 8px; /* small vertical padding to improve touch targets without changing layout */
 }
 nav a:hover {
   text-decoration: underline;
