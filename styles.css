@@ -86,7 +86,7 @@ section {
 body { padding-top: calc(var(--header-height) + 24px); }
 
 @media (min-width: 600px) {
-  :root { --content-padding: 40px; --header-height: 72px; }
+  :root { --content-padding: 40px; --header-height: 72px; --surface-horizontal-padding: 24px; }
   .sticky-header { top: 24px; }
   .header-bar { padding: 10px var(--surface-horizontal-padding); }
   body { padding-top: calc(var(--header-height) + 28px); }
