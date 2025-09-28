@@ -1,11 +1,15 @@
-// Show or hide the Back to Top button
+// Show or hide the Back to Top button (appear only after user scrolls)
 const backToTopBtn = document.getElementById('backToTop');
+let hasScrolledOnce = false;
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    backToTopBtn.style.display = 'flex';
+  // mark that the user attempted to scroll at least once
+  if (!hasScrolledOnce && window.scrollY > 0) hasScrolledOnce = true;
+
+  if (hasScrolledOnce && window.scrollY > 0) {
+    backToTopBtn.classList.add('visible');
   } else {
-    backToTopBtn.style.display = 'none';
+    backToTopBtn.classList.remove('visible');
   }
 });
 
