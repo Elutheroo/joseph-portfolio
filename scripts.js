@@ -186,6 +186,29 @@ if (document.fonts && document.fonts.ready) {
   }
 })();
 
+// If the page was opened with a hash (including when navigating from another page),
+// adjust the scroll to account for the fixed header so the section is not hidden.
+window.addEventListener('load', () => {
+  try {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const id = hash.slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const header = document.querySelector('.sticky-header');
+    const offset = header ? Math.ceil(header.getBoundingClientRect().height) + 12 : 12;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+    // perform a smooth scroll after load to reposition under the sticky header
+    window.setTimeout(() => {
+      window.scrollTo({ top, behavior: 'smooth' });
+    }, 60);
+  } catch (e) {
+    // ignore
+  }
+});
+
 // Contact form handling: validate, open mail client and show custom overlay
 (function contactFormHandler(){
   const form = document.getElementById('contactForm');
