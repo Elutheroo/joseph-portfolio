@@ -57,11 +57,26 @@
     </div>
 
     <aside class="showcase">
-      <img src="images/Room/Cover.jpg" alt="Study Room — cover" loading="eager" decoding="async">
-      <img src="images/Room/Hifi 1.jpg" alt="Study Room — screen 1" loading="lazy" decoding="async">
-      <img src="images/Room/Hifi 2.jpg" alt="Study Room — screen 2" loading="lazy" decoding="async">
-      <img src="images/Room/Hifi 3.jpg" alt="Study Room — screen 3" loading="lazy" decoding="async">
-      <img src="images/Room/Hifi 4.jpg" alt="Study Room — screen 4" loading="lazy" decoding="async">
+      <picture>
+        <source srcset="images/Room/Cover.jpg" type="image/jpeg">
+        <img src="images/Room/Cover.jpg" alt="Study Room — cover" loading="eager" decoding="async" sizes="100vw">
+      </picture>
+      <picture>
+        <source srcset="images/Room/Hifi 1.jpg" type="image/jpeg">
+        <img src="images/Room/Hifi 1.jpg" alt="Study Room — screen 1" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
+      </picture>
+      <picture>
+        <source srcset="images/Room/Hifi 2.jpg" type="image/jpeg">
+        <img src="images/Room/Hifi 2.jpg" alt="Study Room — screen 2" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
+      </picture>
+      <picture>
+        <source srcset="images/Room/Hifi 3.jpg" type="image/jpeg">
+        <img src="images/Room/Hifi 3.jpg" alt="Study Room — screen 3" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
+      </picture>
+      <picture>
+        <source srcset="images/Room/Hifi 4.jpg" type="image/jpeg">
+        <img src="images/Room/Hifi 4.jpg" alt="Study Room — screen 4" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
+      </picture>
     </aside>
   </section>
 
