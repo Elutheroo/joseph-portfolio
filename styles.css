@@ -1611,6 +1611,18 @@ body { padding-top: calc(var(--header-height) + 24px); }
 }
 .case-callout h3 { color: var(--primary-color); margin: 0 0 0.5rem 0; }
 
+/* Quick Facts standard meta styling */
+.case-callout .cs-meta-line {
+  color: #0f6e4a; /* darker shade of primary */
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+.case-callout .cs-tools {
+  color: #0b5c3f; /* slightly darker for tools */
+  font-weight: 600;
+  margin: 0;
+}
+
 /* Presentation CTA */
 .case-cta {
   display: inline-flex;
