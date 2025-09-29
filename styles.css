@@ -1663,6 +1663,16 @@ body { padding-top: calc(var(--header-height) + 24px); }
   .hifi-showcase .large { grid-column: 1 / 2; }
 }
 
+/* On tablet/desktop, if showcase contains two images, stack them vertically */
+@media (min-width: 800px) {
+  .case-slide .showcase {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+  }
+  .case-slide .showcase img { width: 100%; height: auto; display: block; }
+}
+
 /* Accessibility: ensure focus states for slide-nav */
 .slide-nav button:focus { outline: 3px solid rgba(21,140,98,0.18); }
 
