@@ -1613,18 +1613,24 @@ body { padding-top: calc(var(--header-height) + 24px); }
 
 /* Quick Facts standard meta styling */
 .case-callout .cs-meta-line {
-  color: #0f6e4a; /* darker shade of primary */
+  color: #fff; /* values are white */
   font-weight: 600;
   margin: 0 0 0.5rem 0;
 }
 .case-callout .cs-role,
 .case-callout .cs-duration {
-  color: #0f6e4a; /* darker shade of primary */
+  color: #fff; /* values are white */
   font-weight: 600;
   margin: 0 0 0.25rem 0;
 }
+.case-callout .cs-role strong,
+.case-callout .cs-duration strong,
+.case-callout .cs-tools strong {
+  color: var(--primary-color); /* labels are primary green */
+  font-weight: 700;
+}
 .case-callout .cs-tools {
-  color: #0b5c3f; /* slightly darker for tools */
+  color: #fff; /* tools list values white */
   font-weight: 600;
   margin: 0;
 }
