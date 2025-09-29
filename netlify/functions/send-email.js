@@ -67,6 +67,35 @@ exports.handler = async (event, context) => {
   const SMTP_USER = process.env.SMTP_USER;
   const SMTP_PASS = process.env.SMTP_PASS;
 
+  // If NEON_DATABASE_URL is available, enqueue email and return quickly (fast response)
+  const DATABASE_URL = process.env.NEON_DATABASE_URL || process.env.DATABASE_URL || null;
+  if (DATABASE_URL) {
+    try {
+      let { Client } = require('pg');
+      const client = new Client({ connectionString: DATABASE_URL });
+      await client.connect();
+
+      await client.query(`CREATE TABLE IF NOT EXISTS email_queue (
+        id BIGSERIAL PRIMARY KEY,
+        name TEXT,
+        email TEXT,
+        subject TEXT,
+        message TEXT,
+        status TEXT DEFAULT 'pending',
+        created_at TIMESTAMPTZ DEFAULT NOW()
+      )`);
+
+      await client.query(`INSERT INTO email_queue (name,email,subject,message,status) VALUES ($1,$2,$3,$4,'pending')`, [nameT, emailT, subjectT, messageT]);
+      await client.end();
+
+      // respond fast — queued for background processing
+      return json(202, { ok: true, queued: true });
+    } catch (dbErr) {
+      console.warn('Email queue DB insert failed, falling back to immediate send', dbErr && dbErr.message ? dbErr.message : dbErr);
+      // continue to fallback behavior
+    }
+  }
+
   // If SMTP env vars are provided, prefer SMTP transport (nodemailer)
   if (SMTP_HOST && SMTP_USER && SMTP_PASS) {
     try {
