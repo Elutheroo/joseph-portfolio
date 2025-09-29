@@ -342,57 +342,47 @@ window.addEventListener('load', () => {
     const payload = { name, email, subject, message };
     const emailEndpoint = '/.netlify/functions/send-email';
 
-    // Submit to Netlify Forms (so Netlify stores the submission)
-    const netlifySubmit = fetch('/', {
-      method: 'POST',
-      body: formData,
-    }).then(res => res.ok).catch(() => false);
+    // Fast submission: use navigator.sendBeacon when available, fallback to fetch with keepalive
+    try {
+      if (navigator.sendBeacon) {
+        // Netlify form capture
+        try { navigator.sendBeacon('/', formData); } catch (e) { /* ignore */ }
 
-    // Send email notification via serverless function
-    const emailSend = fetch(emailEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    }).then(async res => {
-      if (res.ok) return { ok: true };
-      let text = await res.text().catch(() => 'Server error');
-      return { ok: false, error: text };
-    }).catch(err => ({ ok: false, error: String(err) }));
-
-    Promise.all([netlifySubmit, emailSend]).then(async results => {
-      const [netlifyOk, emailRes] = results;
-
-      if (emailRes && emailRes.ok) {
-        // Prefer to show overlay when email notification succeeded
-        if (overlay) {
-          overlay.classList.remove('hidden');
-          overlay.setAttribute('aria-hidden', 'false');
-        }
-        form.reset();
-      } else if (netlifyOk) {
-        // If email failed but Netlify stored submission, still show overlay but warn in console
-        console.warn('Email send failed but Netlify form saved the submission', emailRes && emailRes.error);
-        if (overlay) {
-          overlay.classList.remove('hidden');
-          overlay.setAttribute('aria-hidden', 'false');
-        }
-        form.reset();
+        // send-email function (fire-and-forget) using Blob JSON
+        try {
+          const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+          navigator.sendBeacon(emailEndpoint, blob);
+        } catch (e) { /* ignore */ }
       } else {
-        // Both failed
-        alert('Could not send message. Please try again later.');
-        console.error('Form submission failed', emailRes && emailRes.error);
+        // fallback: non-blocking fetch with keepalive
+        fetch('/', { method: 'POST', body: formData, keepalive: true }).catch(()=>{});
+        fetch(emailEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(()=>{});
       }
+    } catch (e) { /* ignore */ }
 
-      // stop loading animation and reset button
-      if (submitBtn) {
-        if (loadingInterval) clearInterval(loadingInterval);
-        submitBtn.disabled = false;
-        submitBtn.textContent = origText || 'Send';
+    // Optimistic UI: show overlay immediately for perceived speed and reset form
+    try {
+      if (overlay) {
+        overlay.classList.remove('hidden');
+        overlay.setAttribute('aria-hidden', 'false');
       }
-    }).finally(() => {
-      // ensure interval cleared in any case
-      if (loadingInterval) { clearInterval(loadingInterval); }
-    });
+      form.reset();
+    } catch (e) { /* ignore */ }
+
+    // stop loading animation and reset button
+    if (submitBtn) {
+      if (loadingInterval) clearInterval(loadingInterval);
+      submitBtn.disabled = false;
+      submitBtn.textContent = origText || 'Send';
+    }
+
+    // Background: still attempt to persist via fetch (best-effort) for older browsers
+    setTimeout(() => {
+      try {
+        fetch('/', { method: 'POST', body: formData }).catch(()=>{});
+        fetch(emailEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(()=>{});
+      } catch (e) { /* ignore */ }
+    }, 2000);
   });
 
   // overlay interactions
