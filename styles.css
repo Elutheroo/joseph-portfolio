@@ -1701,3 +1701,15 @@ body { padding-top: calc(var(--header-height) + 24px); }
 .spacer-sm{height:18px}
 
 /* End of presentation-style enhancements */
+
+/* Visual emphasis for case studies */
+.case-study .slide-title { font-size: 2.25rem; line-height: 1.05; }
+@media (min-width: 900px) {
+  .case-study .slide-title { font-size: 3.25rem; }
+  .case-callout { box-shadow: 0 10px 30px rgba(0,0,0,0.45); }
+}
+.case-cta { background: var(--primary-gradient); color: #fff; padding: 12px 20px; border-radius: 32px; display:inline-block; margin-top:12px; }
+.showcase img, .showcase picture img { border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+
+/* Hide presentation nav entirely since it's unused */
+.slide-nav { display: none !important; }
