@@ -306,25 +306,26 @@ form button {
 .form-overlay.hidden { display: none; }
 
 .form-overlay-card {
+  position: relative;
   background: rgba(13,13,13,0.96);
-  padding: 28px 22px 20px 22px;
+  padding: 36px 22px 22px 22px; /* extra top padding so close icon sits above heading */
   border-radius: 14px;
   max-width: 520px;
   width: calc(100% - 48px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.04);
-  /* Parent auto-layout: right aligned */
-  display: flex;
-  justify-content: flex-end;
+  /* Use block layout, we will control children alignment inside */
+  display: block;
+  text-align: center; /* center primary message */
 }
 
-/* Row containing content and close wrapper */
+/* Row containing content and close wrapper (kept for structure) */
 .overlay-row {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   width: 100%;
-  justify-content: flex-end; /* keep overall group right-aligned */
+  justify-content: center; /* center the inner content horizontally */
 }
 
 /* Centered auto-layout for heading, urgent, and actions */
@@ -335,15 +336,17 @@ form button {
   justify-content: center;
   flex: 1 1 auto;
   max-width: 420px;
+  margin: 0 auto;
 }
 
-/* Close wrapper to keep close button right aligned within parent auto-layout */
+/* Close wrapper: position the close icon above heading, outside normal flow */
 .overlay-close-wrapper {
-  display: flex;
-  align-items: flex-start;
+  position: absolute;
+  top: 8px; /* place above the heading */
+  right: 12px;
 }
 
-/* Close icon now participates in layout rather than absolute positioning */
+/* Close icon absolute positioning */
 .overlay-close-icon {
   background: transparent;
   border: none;
@@ -357,10 +360,18 @@ form button {
 .overlay-urgent { text-align: center; }
 
 .form-overlay-card h3 {
-  margin: 4px 0 12px 0; color: #fff; font-size: 1.3rem; font-weight: 800;
+  margin: 4px 0 40px 0; /* 40px space below heading */
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 800;
 }
 
+/* Make overlay CTA full width within max-width */
+.overlay-actions { display: block; margin: 0 auto; width: 100%; max-width: 420px; }
+.overlay-actions .btn-primary { width: 100%; display: block; }
+
 /* Align leading icon inside primary buttons */
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; }
 .btn-primary .icon-leading { margin-right: 12px; display: inline-flex; align-items: center; justify-content: center; }
 .btn-primary span { display: inline-block; vertical-align: middle; }
 
