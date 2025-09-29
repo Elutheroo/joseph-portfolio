@@ -1691,6 +1691,9 @@ body { padding-top: calc(var(--header-height) + 24px); }
   .process-split { grid-template-columns: 1fr; }
   .process-step-number { display: inline-block; margin-bottom: 12px; }
   .hifi-showcase { grid-template-columns: 1fr; }
+
+  /* On mobile, left-align the Project Overview slide title for better reading */
+  #cs-overview .slide-title { text-align: left; }
 }
 
 .spacer{display:block;width:100%;height:24px}
