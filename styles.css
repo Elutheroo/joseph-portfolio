@@ -1630,7 +1630,7 @@ body { padding-top: calc(var(--header-height) + 24px); }
   font-weight: 700;
 }
 .case-callout .cs-tools {
-  color: #fff; /* tools list values white */
+  color: var(--primary-color); /* tools list values use primary color */
   font-weight: 600;
   margin: 0;
 }
