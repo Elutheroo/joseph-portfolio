@@ -57,19 +57,33 @@
     </div>
 
     <aside class="showcase">
-      <img src="images/Theo/Cover.jpg" alt="Theo’s Bakery — cover" loading="eager" decoding="async">
-      <img src="images/Theo/Hifi 1.jpg" alt="Theo’s Bakery — mockup" loading="lazy" decoding="async">
+      <picture>
+        <source srcset="images/Theo/Cover.jpg" type="image/jpeg">
+        <img src="images/Theo/Cover.jpg" alt="Theo’s Bakery — cover" loading="eager" decoding="async" sizes="100vw">
+      </picture>
+      <picture>
+        <source srcset="images/Theo/Hifi 1.jpg" type="image/jpeg">
+        <img src="images/Theo/Hifi 1.jpg" alt="Theo’s Bakery — mockup" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
+      </picture>
     </aside>
 
     <!-- Add video and expanded hifi gallery -->
     <section class="case-slide alt">
       <div class="hifi-showcase">
-        <div class="large showcase"><img src="images/Theo/Hifi 2.jpg" alt="Theo — high fidelity 2" loading="lazy" decoding="async"></div>
+        <div class="large showcase">
+        <picture>
+          <source srcset="images/Theo/Hifi 2.jpg" type="image/jpeg">
+          <img src="images/Theo/Hifi 2.jpg" alt="Theo — high fidelity 2" loading="lazy" decoding="async" sizes="(min-width:900px) 60vw, 100vw">
+        </picture>
+      </div>
         <div>
-          <img src="images/Theo/Hifi 3.jpg" alt="Theo — high fidelity 3" loading="lazy" decoding="async">
+          <picture>
+            <source srcset="images/Theo/Hifi 3.jpg" type="image/jpeg">
+            <img src="images/Theo/Hifi 3.jpg" alt="Theo — high fidelity 3" loading="lazy" decoding="async" sizes="(min-width:900px) 30vw, 100vw">
+          </picture>
         </div>
         <div>
-          <video controls playsinline muted poster="images/Theo/Cover.jpg">
+          <video controls playsinline muted poster="images/Theo/Cover.jpg" aria-label="Theo demo video">
             <source src="images/Theo/VID-20241117-WA0000.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
