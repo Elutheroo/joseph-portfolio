@@ -1673,6 +1673,15 @@ body { padding-top: calc(var(--header-height) + 24px); }
   .case-slide .showcase img { width: 100%; height: auto; display: block; }
 }
 
+/* Mobile: show only one hero image and place it first on the page */
+@media (max-width: 799px) {
+  .case-slide { display: flex; flex-direction: column; }
+  .case-slide .showcase { order: -1; }
+  /* Hide duplicate images on mobile (keep first image only) */
+  .case-slide .showcase img:nth-child(n+2) { display: none; }
+  .case-slide .showcase img { width: 100%; height: auto; display: block; }
+}
+
 /* Accessibility: ensure focus states for slide-nav */
 .slide-nav button:focus { outline: 3px solid rgba(21,140,98,0.18); }
 
