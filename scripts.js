@@ -299,7 +299,7 @@ window.addEventListener('load', () => {
   const overlayCall = document.getElementById('overlayCall');
   if (!form) return;
 
-  form.addEventListener('submit', function(e){
+  form.addEventListener('submit', async function(e){
     e.preventDefault();
 
     const submitBtn = form.querySelector('[type="submit"]');
@@ -342,32 +342,37 @@ window.addEventListener('load', () => {
     const payload = { name, email, subject, message };
     const emailEndpoint = '/.netlify/functions/send-email';
 
-    // Fast submission: use navigator.sendBeacon when available, fallback to fetch with keepalive
+    // Submit to Netlify Forms and wait for confirmation before showing overlay (truthful UI)
+    let netlifyOk = false;
     try {
-      if (navigator.sendBeacon) {
-        // Netlify form capture
-        try { navigator.sendBeacon('/', formData); } catch (e) { /* ignore */ }
+      const res = await fetch('/', { method: 'POST', body: formData });
+      netlifyOk = res && res.ok;
+    } catch (e) {
+      netlifyOk = false;
+    }
 
-        // send-email function (fire-and-forget) using Blob JSON
-        try {
+    if (netlifyOk) {
+      // show overlay only when Netlify captured the submission
+      try {
+        if (overlay) {
+          overlay.classList.remove('hidden');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
+        form.reset();
+      } catch (e) { /* ignore */ }
+
+      // Fire-and-forget email notification: use sendBeacon when available, fallback to fetch keepalive
+      try {
+        if (navigator.sendBeacon) {
           const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
           navigator.sendBeacon(emailEndpoint, blob);
-        } catch (e) { /* ignore */ }
-      } else {
-        // fallback: non-blocking fetch with keepalive
-        fetch('/', { method: 'POST', body: formData, keepalive: true }).catch(()=>{});
-        fetch(emailEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(()=>{});
-      }
-    } catch (e) { /* ignore */ }
-
-    // Optimistic UI: show overlay immediately for perceived speed and reset form
-    try {
-      if (overlay) {
-        overlay.classList.remove('hidden');
-        overlay.setAttribute('aria-hidden', 'false');
-      }
-      form.reset();
-    } catch (e) { /* ignore */ }
+        } else {
+          fetch(emailEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(()=>{});
+        }
+      } catch (e) { /* ignore */ }
+    } else {
+      alert('Could not submit form. Please try again later.');
+    }
 
     // stop loading animation and reset button
     if (submitBtn) {
@@ -376,13 +381,8 @@ window.addEventListener('load', () => {
       submitBtn.textContent = origText || 'Send';
     }
 
-    // Background: still attempt to persist via fetch (best-effort) for older browsers
-    setTimeout(() => {
-      try {
-        fetch('/', { method: 'POST', body: formData }).catch(()=>{});
-        fetch(emailEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(()=>{});
-      } catch (e) { /* ignore */ }
-    }, 2000);
+    // ensure interval cleared in any case
+    if (loadingInterval) { clearInterval(loadingInterval); }
   });
 
   // overlay interactions
