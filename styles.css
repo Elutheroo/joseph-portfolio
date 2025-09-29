@@ -1678,8 +1678,8 @@ body { padding-top: calc(var(--header-height) + 24px); }
 @media (max-width: 799px) {
   .case-slide { display: flex; flex-direction: column; }
   .case-slide .showcase { order: -1; }
-  /* Hide duplicate images on mobile (keep first image only) */
-  .case-slide .showcase img:nth-child(n+2) { display: none; }
+  /* Hide duplicate images on mobile (keep first image only). We target direct children (e.g., picture) so wrapped img elements are also hidden */
+  .case-slide .showcase > *:nth-child(n+2) { display: none; }
   .case-slide .showcase img { width: 100%; height: auto; display: block; }
 }
 
