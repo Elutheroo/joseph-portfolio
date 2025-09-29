@@ -1609,6 +1609,7 @@ body { padding-top: calc(var(--header-height) + 24px); }
   border-radius: 10px;
   border: 1px solid rgba(21,140,98,0.06);
 }
+.case-callout + .case-callout { margin-top: 14px; }
 .case-callout h3 { color: var(--primary-color); margin: 0 0 0.5rem 0; }
 
 /* Quick Facts standard meta styling */
