@@ -360,7 +360,7 @@ form button {
 .overlay-urgent { text-align: center; }
 
 .form-overlay-card h3 {
-  margin: 4px 0 40px 0; /* 40px space below heading */
+  margin: 14px 0 40px 0; /* increased top margin so gap between close icon and heading is ~24px */
   color: #fff;
   font-size: 1.3rem;
   font-weight: 800;
