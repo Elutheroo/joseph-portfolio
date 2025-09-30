@@ -1520,6 +1520,25 @@ body { padding-top: calc(var(--header-height) + 24px); }
   .case-slide.alt.what-shipped .hifi-showcase { grid-template-columns: repeat(3, 1fr); }
   .case-slide.alt.what-shipped .hifi-showcase .large.showcase { grid-column: span 2; }
 }
+
+/* Uniform media styling and process layout */
+.case-slide.alt.what-shipped .hifi-showcase > * { min-width: 0; border-radius: 8px; overflow: hidden; }
+.case-slide.alt.what-shipped .hifi-showcase img,
+.case-slide.alt.what-shipped .hifi-showcase video { box-shadow: none !important; }
+
+@media (min-width: 600px) {
+  .case-slide.alt.what-shipped .hifi-showcase img,
+  .case-slide.alt.what-shipped .hifi-showcase video { aspect-ratio: 16 / 9; object-fit: cover; }
+}
+
+/* My process: 2-column on larger screens */
+.process-split { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: start; }
+.process-step-number { font-weight: 700; color: var(--primary-color); font-family: 'Poppins', sans-serif; }
+@media (min-width: 900px) {
+  .process-split { grid-template-columns: 80px 1fr; gap: 20px; }
+  .process-step-number { text-align: right; padding-top: 6px; }
+}
+.process-figure img { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: none; }
 .projects-grid .project-card {
   padding: var(--project-gutter);
   box-sizing: border-box;
