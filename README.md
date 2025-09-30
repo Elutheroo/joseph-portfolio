@@ -31,7 +31,7 @@
 - Netlify (deployment + forms)
 
 ## 📬 Contact Me
-Reach out via the [live site](https://josepholapagbo.netlify.app#contact) or email: **joseph@example.com**
+Reach out via the [live site](https://josepholapagbo.netlify.app#contact) or email: **olapagbojoseph@gmail.com**
 
 ## 🧾 License
 This project is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
