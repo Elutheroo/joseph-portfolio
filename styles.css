@@ -1801,3 +1801,23 @@ align-items: left;
 #room-what {
 text-align: left;
 }
+
+.case-callout {
+  text-align: left;       /* aligns text to the left */
+  margin: 0;              /* remove any auto-centering margin */
+}
+
+.case-callout h3,
+.case-callout p {
+  text-align: left;       /* make sure headers & paragraphs are left aligned */
+ /* margin: 0 0 8px 0;       optional: spacing between lines */
+}
+
+.prototype-row {
+  display: flex;          /* allow button alignment */
+  justify-content: flex-start;  /* align button to the left */
+}
+
+.case-cta {
+  margin-left: 0;         /* in case it had auto margin */
+}
