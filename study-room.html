@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Study Room App – UX/UI case study by Joseph Olapagbo showcasing a collaborative learning app design." />
-  <meta name="author" content="Joseph Olapagbo" />
-  <title>Joseph Olapagbo | Study Room Case Study</title>
+  <meta name="description" content="Study Room — collaborative learning app — UX/UI case study by Joseph Olapagbo." />
+  <meta name="author" content="Joseph Olapagbo">
+  <title>Study Room — Joseph Olapagbo</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon-j.svg" type="image/svg+xml">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Mulish:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,38 +16,36 @@
   <div class="header-bar">
     <div class="logo">Joseph Olapagbo</div>
 
-    <!-- Hamburger Icon (mobile only) -->
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="hamburger" id="hamburger" aria-label="Open navigation" role="button" aria-expanded="false" tabindex="0">
+      <span></span><span></span><span></span>
     </div>
 
-    <!-- Nav Menu -->
-    <nav id="navMenu">
+    <nav id="navMenu" role="navigation" aria-label="Primary navigation">
       <ul>
         <li><a href="index.html#home">Home</a></li>
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#services">Services</a></li>
         <li><a href="index.html#projects">Projects</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="index.html#resume" class="resume-btn" aria-label="Open resume section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 9l4 4 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 21h14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Resume</span></a></li>
+        <li><a href="index.html#resume" class="resume-btn"><span>Resume</span></a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<main class="case-study">
+<main class="case-study" role="main" aria-labelledby="room-title">
 
-  <section class="case-slide">
-    <div>
-      <h1 class="slide-title">Study Room</h1>
-      <p class="slide-subtitle">A collaborative learning app to help students find peers, share notes, and schedule study sessions.</p>
-      <div class="spacer spacer-sm" aria-hidden></div>
-      <div class="case-callout">
+  <section class="case-slide" aria-label="Study Room hero">
+    <div class="cs-hero-text">
+      <h1 id="room-title" class="slide-title">Study Room</h1>
+      <p class="slide-subtitle">A collaborative study space to organize resources, track progress, and learn together.</p>
+
+      <div class="spacer spacer-sm" aria-hidden="true"></div>
+
+      <div class="case-callout" aria-hidden="true">
         <h3>Quick Facts</h3>
         <p class="cs-role"><strong>Role:</strong> UX/UI Designer</p>
-        <p class="cs-duration"><strong>Duration:</strong> 2 Months</p>
+        <p class="cs-duration"><strong>Duration:</strong> ~2 months</p>
         <p class="cs-tools"><strong>Tools:</strong> Figma, Notion</p>
       </div>
 
@@ -56,70 +54,60 @@
       </div>
     </div>
 
-    <aside class="showcase">
+    <aside class="showcase" aria-hidden="true">
       <picture>
         <source srcset="images/Room/Cover.jpg" type="image/jpeg">
         <img src="images/Room/Cover.jpg" alt="Study Room — cover" loading="eager" decoding="async" sizes="100vw">
       </picture>
       <picture>
         <source srcset="images/Room/Hifi%201.jpg" type="image/jpeg">
-        <img src="images/Room/Hifi%201.jpg" alt="Study Room — screen 1" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
-      </picture>
-      <picture>
-        <source srcset="images/Room/Hifi%202.jpg" type="image/jpeg">
-        <img src="images/Room/Hifi%202.jpg" alt="Study Room — screen 2" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
-      </picture>
-      <picture>
-        <source srcset="images/Room/Hifi%203.jpg" type="image/jpeg">
-        <img src="images/Room/Hifi%203.jpg" alt="Study Room — screen 3" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
-      </picture>
-      <picture>
-        <source srcset="images/Room/Hifi%204.jpg" type="image/jpeg">
-        <img src="images/Room/Hifi%204.jpg" alt="Study Room — screen 4" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
+        <img src="images/Room/Hifi%201.jpg" alt="Study Room screen 1" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
       </picture>
     </aside>
   </section>
 
-  <section class="case-slide alt">
+  <section class="case-slide alt" aria-label="Study Room overview">
     <div>
-      <h2>Project Overview</h2>
-      <p>Study Room is a demo project that helps students discover peers, share notes, and coordinate sessions. The goal was to create a lightweight app with a clear, friendly interface that reduced friction for joining and organizing study groups.</p>
+      <h2>Project overview</h2>
+      <p>Study Room is a productivity and learning app that helps students create dedicated rooms per subject to store notes (images, audio, documents, video), track progress, set reminders, and invite peers to collaborate. The product is intentionally flexible — rooms can be academic or for professional learning (e.g., “Business Management”).</p>
     </div>
   </section>
 
-  <section class="case-slide">
+  <section class="case-slide" aria-label="Study Room process">
     <div>
-      <h2>My Process</h2>
-      <p class="lead">A research-driven approach tailored to student workflows, prioritizing quick discovery and low-friction collaboration.</p>
-      <div class="process-split">
+      <h2>My process</h2>
+      <p class="lead">Research-driven design that focuses on discoverability, low-friction collaboration, and progress tracking.</p>
+
+      <div class="process-split" aria-hidden="true">
         <div class="process-step-number">01</div>
         <div class="process-step-content">
-          <h3>User Research</h3>
-          <p>Conducted interviews and contextual inquiry with students to uncover common collaboration patterns and pain points. Synthesized findings into personas and key user journeys.</p>
+          <h3>User research</h3>
+          <p>I conducted interviews and contextual inquiry with students to map collaboration habits and common organizational problems. Findings informed the core capabilities: multi-room organization, varied file support, reminders and progress tracking.</p>
           <figure class="process-figure">
-            <img src="images/Room/Wireframe.jpg" alt="Study Room wireframe with multiple screens" loading="lazy" decoding="async">
-            <figcaption>Wireframe sheet showing five core screens used during early testing.</figcaption>
+            <img src="images/Room/Wireframe.jpg" alt="Study Room wireframe" loading="lazy" decoding="async">
+            <figcaption>Wireframe sheet showing core screens and flows used in early testing.</figcaption>
           </figure>
         </div>
 
         <div class="process-step-number">02</div>
         <div class="process-step-content">
-          <h3>Design & Validation</h3>
-          <p>Iterated on low-fidelity flows then ran moderated usability tests on high-fidelity prototypes. Refined navigation and onboarding to reduce first-time confusion.</p>
+          <h3>Design & validation</h3>
+          <p>I designed detailed low- and high-fidelity screens, built an interactive prototype, and ran moderated tests to refine onboarding, discovery, and sharing mechanics so new users could create and join rooms without friction.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="case-slide alt">
-    <h3>Wireframes and UI</h3>
-    <div class="hifi-showcase">
+  <section class="case-slide alt" aria-label="Study Room wireframes & UI">
+    <h3>Wireframes & UI</h3>
+    <div class="hifi-showcase" aria-hidden="true">
       <div class="large showcase">
         <picture>
           <source srcset="images/Room/Hifi%202.jpg" type="image/jpeg">
           <img src="images/Room/Hifi%202.jpg" alt="Study Room screen 2" loading="lazy" decoding="async" sizes="(min-width:900px) 60vw, 100vw">
         </picture>
       </div>
+
       <div>
         <picture>
           <source srcset="images/Room/Hifi%203.jpg" type="image/jpeg">
@@ -129,16 +117,18 @@
     </div>
   </section>
 
-  <section class="case-slide">
+  <section class="case-slide" aria-label="Study Room impact">
     <div>
-      <h2>Impact and Learning</h2>
-      <p>The prototype demonstrated improved first-time success rates in key tasks (finding peers, creating sessions). Prioritizing onboarding and discoverability increased user confidence in early tests.</p>
+      <h2>Impact & learnings</h2>
+      <p>Early prototype testing showed improved first-time success rates for tasks like finding peers and creating sessions. Prioritizing onboarding, discoverability, and simple sharing mechanics increased early user confidence and made collaboration straightforward.</p>
+
+      <p><strong>Next steps:</strong> expand reminders and analytics, run broader usability tests, and prepare developer-ready documentation for a future launch.</p>
     </div>
 
     <div>
       <div class="case-callout">
-        <h3>Outcome</h3>
-        <p>A concise, testable prototype with four polished screens and a wireframe set that showcases interaction patterns for future development.</p>
+        <h3>Artifacts</h3>
+        <p>Wireframe images and high-fidelity mockups (screens) used to validate flows and present the product direction.</p>
       </div>
     </div>
   </section>
@@ -151,8 +141,7 @@
   </div>
 </footer>
 
-  <button id="backToTop" aria-label="Back to top"></button>
-
-  <script src="scripts.js"></script>
+<button id="backToTop" aria-label="Back to top"></button>
+<script src="scripts.js"></script>
 </body>
 </html>
