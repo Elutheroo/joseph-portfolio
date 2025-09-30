@@ -1800,6 +1800,7 @@ align-items: left;
 
 #room-what {
 text-align: left;
+margin: 0;
 }
 
 .case-callout {
