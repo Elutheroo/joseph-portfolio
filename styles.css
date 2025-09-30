@@ -1752,5 +1752,28 @@ body { padding-top: calc(var(--header-height) + 24px); }
 .case-cta { background: var(--primary-gradient); color: #fff; padding: 12px 20px; border-radius: 32px; display:inline-block; margin-top:12px; }
 .showcase img, .showcase picture img { border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
 
+/* What I shipped: strict overrides to remove elevation and unify media sizing */
+.what-shipped .showcase { box-shadow: none !important; border: none !important; border-radius: 8px !important; overflow: hidden; }
+.what-shipped .showcase img,
+.what-shipped .showcase picture img { box-shadow: none !important; border-radius: 8px !important; }
+
+/* Ensure one-column media on mobile and equal sizing */
+.what-shipped .hifi-showcase { grid-template-columns: 1fr !important; gap: 12px; }
+.what-shipped .hifi-showcase > * { min-width: 0; border-radius: 8px; overflow: hidden; aspect-ratio: 16 / 9; }
+.what-shipped .hifi-showcase picture,
+.what-shipped .hifi-showcase img,
+.what-shipped .hifi-showcase video { width: 100%; height: 100%; max-width: 100%; object-fit: cover; border-radius: 8px; box-shadow: none !important; }
+
+@media (min-width: 900px) {
+  /* Two-column section: text left, media right */
+  .what-shipped { display: grid !important; grid-template-columns: 1fr 1.2fr !important; gap: 20px; align-items: start; }
+  .what-shipped > h3 { grid-column: 1 / -1; }
+  .what-shipped > .shipped-text { grid-column: 1; }
+  .what-shipped > .hifi-showcase { grid-column: 2; }
+  /* Inside media grid, keep consistent tiles */
+  .what-shipped .hifi-showcase { grid-template-columns: repeat(3, 1fr) !important; }
+  .what-shipped .hifi-showcase .large { grid-column: span 2; }
+}
+
 /* Hide presentation nav entirely since it's unused */
 .slide-nav { display: none !important; }
