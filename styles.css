@@ -1048,7 +1048,7 @@ body { padding-top: calc(var(--header-height) + 24px); }
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  align-items: left;
+  align-items: center;
   margin-bottom: 3rem;
 }
 
@@ -1576,7 +1576,7 @@ body { padding-top: calc(var(--header-height) + 24px); }
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  align-items: left;
+  align-items: center;
   padding: 6rem var(--content-padding);
   margin: 0 auto 2rem;
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.0));
