@@ -3,23 +3,14 @@
 <head>
 
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>Joseph Olapagbo | UX/UI Designer</title>
-
   <link rel="stylesheet" href="styles.css" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-
   <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Poppins:wght@600;800&display=swap" rel="stylesheet"/>
-
-  <!-- Site icons (local SVG: styled "J" in a circle) -->
   <link rel="icon" href="images/favicon-j.svg" type="image/svg+xml" />
-  <link rel="icon" href="images/favicon-j.svg" sizes="32x32" />
-  <link rel="apple-touch-icon" href="images/favicon-j.svg" />
   <meta name="theme-color" content="#0d0d0d" />
-
+  <meta name="description" content="Portfolio — Joseph Olapagbo, UX/UI designer. Case studies: OOU Portal redesign, Theo’s Bakery, Study Room.">
 </head>
 
 <body>
@@ -29,14 +20,14 @@
     <div class="logo">Joseph Olapagbo</div>
 
     <!-- Hamburger Icon (mobile only) -->
-    <div class="hamburger" id="hamburger">
+    <div class="hamburger" id="hamburger" aria-label="Open navigation" role="button" aria-expanded="false" tabindex="0">
       <span></span>
       <span></span>
       <span></span>
     </div>
 
     <!-- Nav Menu -->
-    <nav id="navMenu">
+    <nav id="navMenu" role="navigation" aria-label="Primary navigation">
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -49,202 +40,170 @@
   </div>
 </header>
 
-
-
-  <section id="home" class="hero animate-hero">
-  <h1 class="fade-up">Designing Interfaces That Speak</h1>
-  <p class="fade-up delay-1">Crafting user-first, visually refined digital experiences.</p>
-  <a href="#projects" class="cta-btn fade-up delay-2 pulse-animate">View Projects</a>
-</section>
-
-
-
-  <section id="about">
-
-    <h2>About Me</h2>
-
-    <p>I'm Joseph Olapagbo, a UX/UI designer passionate about intuitive, elegant solutions. I design with empathy and precision, and I'm able to appropriate the use of AI to streamline workflows.</p>
-    <div class="tools-used fade-up delay-2">
-  <h3>Tools I Use</h3>
-  <ul class="tools-list">
-    <li>Figma</li>
-    <li>Adobe XD</li>
-    <li>Framer</li>
-    <li>Zeplin</li>
-    <li>Miro</li>
-    <li>Notion</li>
-    <li>Bolt <span class="ai-badge">AI</span></li>
-    <li>Replit <span class="ai-badge">AI</span></li>
-    <li>Builder io <span class="ai-badge">AI</span></li>
-  </ul>
-</div>
-
+  <section id="home" class="hero animate-hero" role="region" aria-label="Introduction">
+    <h1 class="fade-up">Designing Interfaces That Speak</h1>
+    <p class="fade-up delay-1">Crafting user-first, visually refined digital experiences that solve real problems.</p>
+    <a href="#projects" class="cta-btn fade-up delay-2 pulse-animate">View Projects</a>
   </section>
 
+  <section id="about" role="region" aria-label="About me">
+    <h2>About Me</h2>
+    <p>I'm Joseph Olapagbo — a UX/UI designer who combines clear process with thoughtful aesthetics. I design with empathy, systemization, and a bias for measurable outcomes. I also integrate AI into workflows to deliver faster, consistent work where appropriate.</p>
 
-
-  <section id="services" class="fade-up">
-  <h2>Services</h2>
-  <div class="service-grid">
-    <div class="service-card fade-up delay-1">
-      <h3>UX Research & Strategy</h3>
-      <p>Understand users, map pain points, and define user-centered design goals.</p>
+    <div class="tools-used fade-up delay-2" aria-hidden>
+      <h3>Tools I Use</h3>
+      <ul class="tools-list">
+        <li>Figma</li>
+        <li>Adobe XD</li>
+        <li>Framer</li>
+        <li>Zeplin</li>
+        <li>Miro</li>
+        <li>Notion</li>
+        <li>Bolt <span class="ai-badge">AI</span></li>
+        <li>Replit <span class="ai-badge">AI</span></li>
+        <li>Builder io <span class="ai-badge">AI</span></li>
+      </ul>
     </div>
-    <div class="service-card fade-up delay-2">
-      <h3>UI Design & Prototyping</h3>
-      <p>High-fidelity interfaces built for clarity, aesthetics, and usability.</p>
-    </div>
-    <div class="service-card fade-up delay-3">
-      <h3>Responsive Web & Mobile</h3>
-      <p>Designs that adapt fluidly across devices for a seamless experience.</p>
-    </div>
-    <div class="service-card fade-up delay-4">
-      <h3>Design Systems</h3>
-      <p>Scalable design libraries that unify your brand and speed up development.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-
-
-  <section id="projects">
-  <h2>Featured Projects</h2>
-  <div class="projects-grid">
-
-    <!-- OOU Portal Redesign -->
-    <a href="oou-portal-redesign.html" class="project-card">
-      <picture>
-        <source srcset="images/OOU/Project-card.jpg" type="image/jpeg">
-        <img src="images/OOU/Project-card.jpg" alt="New cover — OOU Portal Redesign" loading="lazy" decoding="async" sizes="(max-width:600px) 100vw, 33vw">
-      </picture>
-      <div class="project-content">
-        <h3>OOU Portal Redesign</h3>
-        <p>Redesigning the Olabisi Onabanjo University portal for intuitive navigation and modern UI.</p>
+  <section id="services" class="fade-up" role="region" aria-label="Services">
+    <h2>Services</h2>
+    <div class="service-grid" role="list">
+      <div class="service-card fade-up delay-1" role="listitem">
+        <h3>UX Research & Strategy</h3>
+        <p>Understand users, map pain points, and define user-centered design goals that align with business priorities.</p>
       </div>
-    </a>
-
-    <!-- Theo's Bakery -->
-    <a href="theos-bakery.html" class="project-card">
-      <picture>
-        <source srcset="images/Theo/Cover.jpg" type="image/jpeg">
-        <img src="images/Theo/Cover.jpg" alt="Cover — Theo’s Bakery" loading="lazy" decoding="async" sizes="(max-width:600px) 100vw, 33vw">
-      </picture>
-      <div class="project-content">
-        <h3>Theo’s Bakery</h3>
-        <p>UX/UI design process for a bakery e-commerce platform, from wireframes to high-fidelity mockups.</p>
+      <div class="service-card fade-up delay-2" role="listitem">
+        <h3>UI Design & Prototyping</h3>
+        <p>High-fidelity interfaces built for clarity, accessibility, and developer-friendly handoffs.</p>
       </div>
-    </a>
-
-    <!-- Study Room -->
-    <a href="study-room.html" class="project-card">
-      <img src="images/study-room-cover.jpg" alt="Study Room App" loading="lazy" decoding="async">
-      <div class="project-content">
-        <h3>Study Room</h3>
-        <p>Designing a collaborative learning app to help students share resources and study together.</p>
+      <div class="service-card fade-up delay-3" role="listitem">
+        <h3>Responsive Web & Mobile</h3>
+        <p>Designs that adapt fluidly across devices for a consistent user experience.</p>
       </div>
-    </a>
+      <div class="service-card fade-up delay-4" role="listitem">
+        <h3>Design Systems</h3>
+        <p>Design tokens, components, and documentation to keep product design consistent and scalable.</p>
+      </div>
+    </div>
+  </section>
 
-  </div>
-</section>
+  <section id="projects" role="region" aria-label="Featured projects">
+    <h2>Featured Projects</h2>
 
+    <div class="projects-grid">
 
+      <!-- OOU Portal Redesign -->
+      <a href="oou-portal-redesign.html" class="project-card" aria-label="Open OOU Portal case study">
+        <picture>
+          <source srcset="images/OOU/Project-card.jpg" type="image/jpeg">
+          <img src="images/OOU/Project-card.jpg" alt="OOU Portal redesign cover" loading="lazy" decoding="async" sizes="(max-width:600px) 100vw, 33vw">
+        </picture>
+        <div class="project-content">
+          <h3>OOU Portal — Student Portal Redesign</h3>
+          <p>Redesigned the Olabisi Onabanjo University portal to simplify navigation, improve information architecture, and make essential tasks — checking results, printing exam passes, paying fees — far easier and more inclusive for students, staff, and cyber-café operators.</p>
+        </div>
+      </a>
 
+      <!-- Theo's Bakery -->
+      <a href="theos-bakery.html" class="project-card" aria-label="Open Theo's Bakery case study">
+        <picture>
+          <source srcset="images/Theo/Cover.jpg" type="image/jpeg">
+          <img src="images/Theo/Cover.jpg" alt="Theo's Bakery cover" loading="lazy" decoding="async" sizes="(max-width:600px) 100vw, 33vw">
+        </picture>
+        <div class="project-content">
+          <h3>Theo’s Bakery — Mobile E-commerce</h3>
+          <p>End-to-end mobile app design for a bakery e-commerce experience: onboarding, browsing, secure checkout, and order flow. Built as a course project using the full design-thinking cycle — research, iterate, prototype, test.</p>
+        </div>
+      </a>
 
+      <!-- Study Room -->
+      <a href="study-room.html" class="project-card" aria-label="Open Study Room case study">
+        <picture>
+          <source srcset="images/study-room-cover.jpg" type="image/jpeg">
+          <img src="images/study-room-cover.jpg" alt="Study Room app cover" loading="lazy" decoding="async" sizes="(max-width:600px) 100vw, 33vw">
+        </picture>
+        <div class="project-content">
+          <h3>Study Room — Collaborative Learning</h3>
+          <p>A flexible study and knowledge-management app that lets students create subject rooms, add resources (images, audio, documents, video), track study progress, set reminders, and invite peers to collaborate.</p>
+        </div>
+      </a>
 
-  <section id="testimonials">
+    </div>
+  </section>
 
+  <section id="testimonials" role="region" aria-label="Testimonials">
     <h2>Testimonials</h2>
 
-    <div class="testimonial-carousel">
-
-      <div class="testimonial-item">
+    <div class="testimonial-carousel" role="list">
+      <div class="testimonial-item" role="listitem">
         <blockquote>“Joseph brings exceptional creativity and clarity to UX. A pleasure to work with.”</blockquote>
         <div class="testimonial-author">— Alex Morgan</div>
       </div>
 
-      <div class="testimonial-item">
+      <div class="testimonial-item" role="listitem">
         <blockquote>“Working with Joseph transformed our product — the interfaces are intuitive and beautiful.”</blockquote>
         <div class="testimonial-author">— Jamie Smith</div>
       </div>
 
-      <div class="testimonial-item">
+      <div class="testimonial-item" role="listitem">
         <blockquote>“Joseph's attention to detail and user empathy led to measurable improvements in engagement.”</blockquote>
         <div class="testimonial-author">— Priya Kapoor</div>
       </div>
-
     </div>
-
   </section>
 
-
-
-  <section id="contact">
-
+  <section id="contact" role="region" aria-label="Contact">
     <h2>Contact Me</h2>
 
     <form id="contactForm" name="contact" method="POST" data-netlify="true">
-  <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="text" name="subject" placeholder="Subject" required />
+      <textarea name="message" placeholder="Your message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
 
-  <input type="text" name="name" placeholder="Name" required />
-  <input type="email" name="email" placeholder="Email" required />
-  <input type="text" name="subject" placeholder="Subject" required />
-  <textarea name="message" placeholder="Your message" required></textarea>
+    <!-- Custom success overlay (hidden by default) -->
+    <div id="formOverlay" class="form-overlay hidden" aria-hidden="true">
+      <div class="form-overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+        <div class="overlay-row">
+          <div class="overlay-content">
+            <h3 id="overlayTitle">Your message has been successfully delivered!</h3>
+            <p class="overlay-urgent">Urgent?</p>
+            <div class="overlay-actions">
+              <button id="overlayCall" class="btn-primary" aria-label="Put a call through"><span>Put a call through</span></button>
+            </div>
+          </div>
 
-  <button type="submit">Send</button>
-</form>
-
-<!-- Custom success overlay (hidden by default) -->
-<div id="formOverlay" class="form-overlay hidden" aria-hidden="true">
-  <div class="form-overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
-    <div class="overlay-row">
-      <div class="overlay-content">
-        <h3 id="overlayTitle">Your message has been successfully delivered!</h3>
-        <p class="overlay-urgent">Urgent?</p>
-        <div class="overlay-actions">
-          <button id="overlayCall" class="btn-primary" aria-label="Put a call through"><span>Put a call through</span></button>
+          <div class="overlay-close-wrapper">
+            <button id="overlayCloseIcon" class="overlay-close-icon" aria-label="Close overlay">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M6 18L18 6" stroke="#cfcfcf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
         </div>
       </div>
-
-      <div class="overlay-close-wrapper">
-        <button id="overlayCloseIcon" class="overlay-close-icon" aria-label="Close overlay">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M6 18L18 6" stroke="#cfcfcf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
     </div>
-  </div>
-</div>
 
     <div class="social-links" aria-label="Social links">
-
       <a href="https://www.linkedin.com/in/joseph-olapagbo-850077244?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">LinkedIn</a>
       <span aria-hidden> | </span>
       <a href="https://www.upwork.com/freelancers/~0181f57fe0ee242aaf" target="_blank" rel="noopener noreferrer" aria-label="Upwork profile">Upwork</a>
       <span aria-hidden> | </span>
       <a href="https://wa.me/2347014877302" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp chat">WhatsApp</a>
-
     </div>
-
   </section>
 
-
-
-  <section id="resume">
-
+  <section id="resume" role="region" aria-label="Resume">
     <a href="resume.pdf" class="resume-download" download aria-label="Download resume"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 9l4 4 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 21h14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Download My Resume</span></a>
-
   </section>
-
-
 
   <footer>
-
     <div class="footer-bar">
       <p>© <span id="year">2025</span> Joseph Olapagbo. All rights reserved.</p>
-      </div>
-
+    </div>
   </footer>
-
-
 
   <button id="backToTop" aria-label="Back to top"></button>
 
@@ -263,5 +222,4 @@
 
   <script src="scripts.js"></script>
 </body>
-
 </html>
