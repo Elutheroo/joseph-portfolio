@@ -105,6 +105,18 @@ const observer = new IntersectionObserver(
           img.style.animationDelay = (idx * 0.08) + 's';
         });
 
+        // Autoplay videos in What I shipped when section enters view (once)
+        const vids = entry.target.querySelectorAll('section.what-shipped video[data-autoplay-on-view]');
+        vids.forEach(v => {
+          try {
+            v.muted = true;
+            v.playsInline = true;
+            v.loop = false;
+            v.play().catch(()=>{});
+            v.addEventListener('ended', () => { try { v.pause(); } catch(e) { /* ignore */ } }, { once: true });
+          } catch (e) { /* ignore */ }
+        });
+
         observer.unobserve(entry.target);
       }
     });
