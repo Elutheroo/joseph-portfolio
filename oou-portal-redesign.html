@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Olabisi Onabanjo University Portal Redesign ��� UX/UI case study by Joseph Olapagbo to improve navigation, visual hierarchy, and accessibility for students, staff, and cyber cafe operators.">
+  <meta name="description" content="OOU Portal Redesign — UX/UI case study by Joseph Olapagbo: improving navigation, accessibility and student workflows." />
   <meta name="author" content="Joseph Olapagbo">
-  <title>Joseph Olapagbo | OOU Portal Redesign Case Study</title>
+  <title>OOU Portal Redesign — Joseph Olapagbo</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon-j.svg" type="image/svg+xml">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Mulish:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,139 +16,134 @@
   <div class="header-bar">
     <div class="logo">Joseph Olapagbo</div>
 
-    <!-- Hamburger Icon (mobile only) -->
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="hamburger" id="hamburger" aria-label="Open navigation" role="button" aria-expanded="false" tabindex="0">
+      <span></span><span></span><span></span>
     </div>
 
-    <!-- Nav Menu -->
-    <nav id="navMenu">
+    <nav id="navMenu" role="navigation" aria-label="Primary navigation">
       <ul>
         <li><a href="index.html#home">Home</a></li>
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#services">Services</a></li>
         <li><a href="index.html#projects">Projects</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="index.html#resume" class="resume-btn" aria-label="Open resume section"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 9l4 4 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 21h14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Resume</span></a></li>
+        <li><a href="index.html#resume" class="resume-btn" aria-label="Download resume"><span>Resume</span></a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<main class="case-study">
-  <!-- Slide 1: Hero -->
-  <section class="case-slide">
-    <div>
-      <h1 class="slide-title">Olabisi Onabanjo University Portal Redesign</h1>
-      <p class="slide-subtitle">Transforming an outdated university portal into a modern, intuitive experience for students, staff, and cyber café operators.</p>
+<main class="case-study" role="main" aria-labelledby="oou-title">
 
-      <div class="spacer spacer-sm" aria-hidden></div>
+  <!-- Hero / Quick Facts -->
+  <section class="case-slide" aria-label="OOU overview">
+    <div class="cs-hero-text">
+      <h1 id="oou-title" class="slide-title">Olabisi Onabanjo University — Portal Redesign</h1>
+      <p class="slide-subtitle">A student-dashboard redesign focused on clarity, accessibility, and intuitive user flows for routine academic tasks.</p>
 
-      <div class="case-callout" aria-hidden>
+      <div class="spacer spacer-sm" aria-hidden="true"></div>
+
+      <div class="case-callout" aria-hidden="true">
         <h3>Quick Facts</h3>
         <p class="cs-role"><strong>Role:</strong> UX/UI Designer</p>
-        <p class="cs-duration"><strong>Duration:</strong> 1 Month</p>
+        <p class="cs-duration"><strong>Duration:</strong> ~1 month</p>
         <p class="cs-tools"><strong>Tools:</strong> Figma, Notion</p>
       </div>
 
       <div class="prototype-row">
         <a class="case-cta" href="https://www.figma.com/proto/qu73nXiP6G6SwPkwETykQa/OOU-Portal-Redesign?node-id=158-586&amp;t=8S9OP8sRIEOt2PYa-1" target="_blank" rel="noopener noreferrer" aria-label="View OOU prototype"><span>View Prototype</span></a>
       </div>
-
-      <div class="spacer spacer-sm" aria-hidden></div>
     </div>
 
-    <aside class="showcase" aria-hidden>
+    <aside class="showcase" aria-hidden="true">
       <picture>
         <source srcset="images/OOU/Hero.jpg" type="image/jpeg">
         <img src="images/OOU/Hero.jpg" alt="OOU Portal Redesign — hero" loading="eager" decoding="async" sizes="100vw">
       </picture>
       <picture>
         <source srcset="images/OOU/Project-card.jpg" type="image/jpeg">
-        <img src="images/OOU/Project-card.jpg" alt="OOU Portal Redesign — project card preview" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
+        <img src="images/OOU/Project-card.jpg" alt="OOU Portal — overview thumbnail" loading="lazy" decoding="async" sizes="(min-width:800px) 50vw, 100vw">
       </picture>
     </aside>
   </section>
 
-  <!-- Slide 2: Overview -->
-  <section id="cs-overview" class="case-slide alt">
+  <!-- Project Overview & Problem -->
+  <section id="cs-overview" class="case-slide alt" aria-label="Project overview">
     <div>
-      <div class="slide-title">Project Overview</div>
-      <div class="overview-body">
-        <!-- Overview intro can remain empty or include brief lead-in if needed -->
-      </div>
+      <h2>Project overview</h2>
+      <p>The OOU portal is the university’s primary system for results, document verification, fee payment, and other administrative workflows. Over time the interface became cluttered, provided poor visual hierarchy, and created friction particularly for non-technical students and third-party operators who rely on the portal during peak events (e.g., results release).</p>
     </div>
 
     <div>
-      <div class="case-callout">
-        <h3>The Problem</h3>
-        <p>The portal was difficult to navigate, with an outdated and cluttered layout that frustrated users.</p>
+      <div class="case-callout" aria-hidden="true">
+        <h3>The problem</h3>
+        <p>Users faced confusing navigation, inconsistent information architecture, and frequent technical errors during high-load events. The portal was difficult to use on mobile and lacked an inclusive experience for less tech-savvy users.</p>
       </div>
 
-      <div class="case-callout">
-        <h3>The Goal</h3>
-        <p>Create a modern, intuitive interface improving usability for students, staff, and cyber café operators.</p>
+      <div class="case-callout" aria-hidden="true">
+        <h3>The goal</h3>
+        <p>Design a clean, maintainable portal that surfaces essential tasks quickly, reduces cognitive load, and works reliably across devices. While creating a small, pragmatic design system for consistent implementation.</p>
       </div>
     </div>
   </section>
 
-  <!-- Slide 3: My Process -->
-  <section class="case-slide">
+  <!-- Process -->
+  <section class="case-slide" aria-label="Process">
     <div>
-      <h2>My Process</h2>
-      <p class="lead">A focused, outcome-driven approach that balanced quick usability wins with systematic redesign of information architecture and visual language.</p>
+      <h2>My process</h2>
+      <p class="lead">I followed a practical, outcome-driven process: understand, ideate, iterate, and validate — balancing quick usability wins with system-level improvements to information architecture.</p>
 
-      <div class="process-split">
+      <div class="process-split" aria-hidden="true">
         <div class="process-step-number">01</div>
         <div class="process-step-content">
           <h3>Discovery & Audit</h3>
-          <p>I started with a heuristic audit and analytics review to identify the most critical usability gaps. Deliverables: audit report, annotated screenshots, and a prioritized backlog.</p>
-          <figure class="process-figure" aria-hidden>
+          <p>I used hands-on exploration of the live portal to document the most common pain points and gather annotated screenshots for a heuristic audit. This made it possible to prioritize improvements that would have immediate impact for students and staff.</p>
+          <figure class="process-figure">
             <img src="images/OOU/Before-Landing.jpg" alt="OOU — before landing screenshot" loading="lazy" decoding="async">
-            <figcaption>Annotated screenshot from the existing portal used in the audit.</figcaption>
+            <figcaption>Annotated screenshots and notes used during the audit phase.</figcaption>
           </figure>
         </div>
 
         <div class="process-step-number">02</div>
         <div class="process-step-content">
           <h3>Mapping & Ideation</h3>
-          <p>I mapped user journeys for students, staff, and cyber-cafe operators, ran stakeholder workshops, and sketched wireframes to validate information architecture changes. Deliverables: journey maps, low-fidelity wireframes.</p>
-          <figure class="process-figure" aria-hidden>
+          <p>I mapped core journeys (students, staff, cyber-café operators), sketched paper wireframes, then validated information architecture changes with low-fidelity screens. These sketches shaped how navigation and dashboard affordances would be reorganized.</p>
+          <figure class="process-figure">
             <img src="images/OOU/Wireframe%201.jpg" alt="OOU — wireframe example" loading="lazy" decoding="async">
-            <figcaption>Paper and digital wireframe iterations that informed IA changes.</figcaption>
+            <figcaption>Wireframe iterations informed IA improvements and flow simplification.</figcaption>
           </figure>
         </div>
 
         <div class="process-step-number">03</div>
         <div class="process-step-content">
           <h3>Design & Systemization</h3>
-          <p>I translated validated wireframes into high-fidelity screens and created a lightweight design system to ensure consistency across pages. Deliverables: hi-fi screens, component library, and a Figma variables snapshot.</p>
-          <figure class="process-figure" aria-hidden>
+          <p>I translated validated wireframes into high-fidelity screens and created a lightweight design system with tokens (color, spacing, typography) so future pages would stay consistent. I sampled existing branding colors and extended them into a clearer palette for accessibility.</p>
+          <figure class="process-figure">
             <img src="images/OOU/Design%20System.jpg" alt="OOU — design system variables" loading="lazy" decoding="async">
-            <figcaption>Design system excerpt (color tokens and spacing scale) used to keep UI consistent.</figcaption>
+            <figcaption>Design tokens snapshot (color & spacing) used to keep the UI consistent.</figcaption>
           </figure>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Slide 4: Designs -->
-  <section class="case-slide alt">
-    <div class="hifi-showcase">
+  <!-- Designs and Highlights -->
+  <section class="case-slide alt" aria-label="Design highlights">
+    <div class="hifi-showcase" aria-hidden="true">
       <div class="large showcase">
         <picture>
           <source srcset="images/OOU/Dashboard.jpg" type="image/jpeg">
           <img src="images/OOU/Dashboard.jpg" alt="Dashboard — high fidelity" loading="lazy" decoding="async" sizes="(min-width:900px) 60vw, 100vw">
         </picture>
       </div>
+
       <div>
         <picture>
           <source srcset="images/OOU/Dashboard-Dark.jpg" type="image/jpeg">
           <img src="images/OOU/Dashboard-Dark.jpg" alt="Dashboard (dark) — high fidelity" loading="lazy" decoding="async" sizes="(min-width:900px) 30vw, 100vw">
         </picture>
       </div>
+
       <div>
         <picture>
           <source srcset="images/OOU/Landing%20below-the-fold.jpg" type="image/jpeg">
@@ -158,39 +153,29 @@
     </div>
 
     <div>
-      <h3>Wireframes and UI</h3>
-      <p>I iterated rapidly from paper sketches to digital wireframes, then consolidated approved patterns into high-fidelity screens and components. Below are representative artifacts showing the progression from concept to final UI.</p>
-      <div class="wireframe-row">
-        <img src="images/OOU/Wireframe%201.jpg" alt="Paper Wireframe 1" loading="lazy" decoding="async">
-        <img src="images/OOU/Wireframe%202.jpg" alt="Paper Wireframe 2" loading="lazy" decoding="async">
+      <h3>What I shipped</h3>
+      <p>I delivered a redesigned landing page and a reorganized student dashboard with clearer task affordances, improved information hierarchy, responsive layouts and a dark mode option. Icons and microcopy were refined to reduce ambiguity around common flows such as result checking and document printing.</p>
+
+      <div class="wireframe-row" aria-hidden="true">
+        <img src="images/OOU/Wireframe%201.jpg" alt="Paper Wireframe 1" loading="lazy">
+        <img src="images/OOU/Wireframe%202.jpg" alt="Paper Wireframe 2" loading="lazy">
       </div>
-      <div class="wireframe-row">
-        <img src="images/OOU/Wireframe%203.jpg" alt="Digital Wireframe 1" loading="lazy" decoding="async">
-        <img src="images/OOU/Wireframe%204.jpg" alt="Digital Wireframe 2" loading="lazy" decoding="async">
-      </div>
-      <div class="wireframe-row">
-        <img src="images/OOU/Wireframe%205.jpg" alt="Wireframe 5" loading="lazy" decoding="async">
-        <img src="images/OOU/Wireframe%206.jpg" alt="Wireframe 6" loading="lazy" decoding="async">
-      </div>
-      <figure class="process-figure">
-        <img src="images/OOU/Dashboard.jpg" alt="Final dashboard screen" loading="lazy" decoding="async">
-        <figcaption>Selected high-fidelity screens that formed part of the delivered UI.</figcaption>
-      </figure>
     </div>
   </section>
 
-  <!-- Slide 5: Impact and Learning -->
-  <section class="case-slide">
+  <!-- Impact -->
+  <section class="case-slide" aria-label="Impact and learnings">
     <div>
-      <h2>Impact and Learning</h2>
-      <p>The redesign made the portal cleaner and reduced navigation time for key tasks. Stakeholder feedback and usability testing indicated the most frequent tasks became faster to complete, and the consistent visual language reduced errors in form submissions.</p>
-      <p><strong>Key learning:</strong> Creating a lightweight design system early prevented design debt and made the handoff to developers more efficient.</p>
+      <h2>Impact & learnings</h2>
+      <p>The redesign reduced navigational friction for core student tasks and produced immediate positive feedback from peers. When I shared the prototype with 5–6 students and posted it on LinkedIn, an OOU student commented that the university should adopt the new interface. That's a strong validation that the improvements address real needs.</p>
+
+      <p><strong>Key learnings:</strong> paper-before-pixel helps keep decisions focused, and establishing design tokens early prevents inconsistent UI patterns. The project reinforced how small IA changes can have outsized effects on usability.</p>
     </div>
 
     <div>
       <div class="case-callout">
-        <h3>Outcome</h3>
-        <p>Improved navigation and clearer visual hierarchy led to easier access for students and staff.</p>
+        <h3>Next steps</h3>
+        <p>Run formal usability testing with a broader sample, document developer handoff, and present the redesign internally to HOD/VC to explore adoption opportunities.</p>
       </div>
     </div>
   </section>
@@ -203,8 +188,7 @@
   </div>
 </footer>
 
-  <button id="backToTop" aria-label="Back to top"></button>
-
-  <script src="scripts.js"></script>
+<button id="backToTop" aria-label="Back to top"></button>
+<script src="scripts.js"></script>
 </body>
 </html>
