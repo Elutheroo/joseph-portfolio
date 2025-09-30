@@ -1793,3 +1793,7 @@ text-align: left;
 #room-title {
 text-align: left;
 }
+
+.case-callout {
+align-items: left;
+}
